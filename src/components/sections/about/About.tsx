@@ -11,7 +11,7 @@ const About = () => (
         <div className="space-y-5 md:col-span-3">
           <ScrollReveal>
             <p className="font-body text-base md:text-lg leading-relaxed text-muted-foreground">
-              I am a Digital Economy graduate from Tashkent University of Information Technologies
+              I am a graduate from Tashkent University of Information Technologies
               with a strong interest in artificial intelligence, blockchain, web development, and
               modern technologies.
             </p>
@@ -40,7 +40,7 @@ const About = () => (
             <div className="space-y-4">
               {[
                 { label: "Location", value: "Uzbekistan" },
-                { label: "Education", value: "B.S. Digital Economy, TUIT (2025)" },
+                { label: "Education", value: "TUIT (2025)" },
                 { label: "Focus", value: "AI/ML Engineering & Web Development" },
                 { label: "Languages", value: "Uzbek (Native), English (Advanced), Russian" },
               ].map((item) => (
