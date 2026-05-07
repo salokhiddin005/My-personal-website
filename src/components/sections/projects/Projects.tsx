@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Star, GitFork, ExternalLink, Code } from "lucide-react";
+import { Star, GitFork, ExternalLink, Code, Play, X } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import SectionTitle from "@/components/common/SectionTitle";
 import ScrollReveal from "@/components/common/ScrollReveal";
@@ -27,6 +27,14 @@ interface GitHubRepo {
 
 const GITHUB_USERNAME = "salokhiddin005";
 
+const demoVideos: Record<string, string> = {
+  "PPE-Detection": "https://ik.imagekit.io/ssqt6ora1/ppe-detection.mp4?updatedAt=1778165778708",
+  "Theater-CV": "https://ik.imagekit.io/ssqt6ora1/theater_cv.mp4?updatedAt=1778165450677",
+  "nail-size-detection": "https://ik.imagekit.io/ssqt6ora1/nailytics.mp4?updatedAt=1778165387251",
+  "Smart-Gym-Monitoring": "https://ik.imagekit.io/ssqt6ora1/test_1_annotated.mp4?updatedAt=1778164914119",
+  "Fight_detection": "https://ik.imagekit.io/ssqt6ora1/fight_nonfight.mp4?updatedAt=1778164827110",
+};
+
 const languageColors: Record<string, string> = {
   TypeScript: "#3178c6",
   JavaScript: "#f7df1e",
@@ -43,20 +51,64 @@ const languageColors: Record<string, string> = {
   Kotlin: "#A97BFF",
 };
 
-const RepoCard = ({ repo }: { repo: GitHubRepo }) => {
+const VideoModal = ({ src, title, onClose }: { src: string; title: string; onClose: () => void }) => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
+    document.addEventListener("keydown", handleKey);
+    return () => document.removeEventListener("keydown", handleKey);
+  }, [onClose]);
+
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+      onClick={onClose}
+    >
+      <div
+        className="relative w-full max-w-4xl border border-border bg-card"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Header */}
+        <div className="flex items-center justify-between border-b border-border px-5 py-3">
+          <span className="font-mono text-xs uppercase tracking-widest text-primary">
+            {title.replace(/-|_/g, " ")}
+          </span>
+          <button onClick={onClose} className="text-muted-foreground hover:text-foreground transition-colors">
+            <X className="h-4 w-4" />
+          </button>
+        </div>
+        {/* Video */}
+        <div className="aspect-video bg-black">
+          <video
+            ref={videoRef}
+            src={src}
+            className="h-full w-full object-contain"
+            controls
+            autoPlay
+            playsInline
+          />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const RepoCard = ({ repo, onWatchDemo }: { repo: GitHubRepo; onWatchDemo?: () => void }) => {
   const langColor = repo.language
     ? (languageColors[repo.language] ?? "#6366f1")
     : "#6366f1";
+  const hasDemo = !!demoVideos[repo.name];
 
   return (
-    <a
-      href={repo.html_url}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="group flex h-full w-full flex-col overflow-hidden border border-border bg-card text-left transition-all duration-500 hover:border-primary/40 hover:shadow-xl hover:shadow-primary/5"
-    >
+    <div className="group flex h-full w-full flex-col overflow-hidden border border-border bg-card transition-all duration-500 hover:border-primary/40 hover:shadow-xl hover:shadow-primary/5">
       {/* Image Header */}
-      <div className="relative aspect-video w-full overflow-hidden bg-muted/30">
+      <a
+        href={repo.html_url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="relative aspect-video w-full overflow-hidden bg-muted/30 block"
+      >
         <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-primary/5 to-transparent">
           <Code className="h-10 w-10 text-primary/40" />
         </div>
@@ -86,54 +138,68 @@ const RepoCard = ({ repo }: { repo: GitHubRepo }) => {
             </span>
           </div>
         )}
-      </div>
+      </a>
 
       {/* Content Body */}
       <div className="flex flex-1 flex-col p-5 sm:p-6 md:p-8">
-        <h3 className="font-display text-2xl font-bold leading-tight italic text-foreground transition-colors group-hover:text-primary line-clamp-2">
-          {repo.name.replace(/-/g, " ")}
+        <h3 className="font-display text-2xl font-bold leading-tight italic text-foreground line-clamp-2">
+          {repo.name.replace(/-|_/g, " ")}
         </h3>
 
         <p className="mt-4 mb-6 flex-1 font-body text-sm leading-relaxed text-muted-foreground line-clamp-2">
           {repo.description ?? "No description provided."}
         </p>
 
-        <div className="mt-auto flex items-center justify-between border-t border-border pt-6">
-          {/* Topics */}
-          <div className="flex flex-wrap gap-2">
-            {repo.topics.slice(0, 2).map((topic) => (
-              <span
-                key={topic}
-                className="font-mono text-[10px] uppercase tracking-tighter text-muted-foreground"
-              >
-                #{topic}
-              </span>
-            ))}
-          </div>
+        <div className="mt-auto border-t border-border pt-6 flex flex-col gap-4">
+          {/* Watch Demo button */}
+          {hasDemo && (
+            <button
+              onClick={onWatchDemo}
+              className="flex items-center justify-center gap-2 border border-primary/40 bg-primary/10 px-4 py-2 font-mono text-[10px] uppercase tracking-widest text-primary transition-all duration-300 hover:bg-primary hover:text-primary-foreground"
+            >
+              <Play className="h-3 w-3" />
+              Watch Demo
+            </button>
+          )}
 
-          {/* Stars & Forks */}
-          <div className="flex items-center gap-3">
-            {repo.stargazers_count > 0 && (
-              <span className="flex items-center gap-1 font-mono text-[10px] font-bold uppercase tracking-wider text-primary">
-                <Star className="h-3 w-3" />
-                {repo.stargazers_count}
-              </span>
-            )}
-            {repo.forks_count > 0 && (
-              <span className="flex items-center gap-1 font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
-                <GitFork className="h-3 w-3" />
-                {repo.forks_count}
-              </span>
-            )}
+          <div className="flex items-center justify-between">
+            {/* Topics */}
+            <div className="flex flex-wrap gap-2">
+              {repo.topics.slice(0, 2).map((topic) => (
+                <span
+                  key={topic}
+                  className="font-mono text-[10px] uppercase tracking-tighter text-muted-foreground"
+                >
+                  #{topic}
+                </span>
+              ))}
+            </div>
+
+            {/* Stars & Forks */}
+            <div className="flex items-center gap-3">
+              {repo.stargazers_count > 0 && (
+                <span className="flex items-center gap-1 font-mono text-[10px] font-bold uppercase tracking-wider text-primary">
+                  <Star className="h-3 w-3" />
+                  {repo.stargazers_count}
+                </span>
+              )}
+              {repo.forks_count > 0 && (
+                <span className="flex items-center gap-1 font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
+                  <GitFork className="h-3 w-3" />
+                  {repo.forks_count}
+                </span>
+              )}
+            </div>
           </div>
         </div>
       </div>
-    </a>
+    </div>
   );
 };
 
 const Projects = () => {
   const [filter, setFilter] = useState("All");
+  const [activeVideo, setActiveVideo] = useState<{ src: string; title: string } | null>(null);
   const isNarrow = useMediaQuery(640);
   const [carouselApi, setCarouselApi] = useState<CarouselApi>();
 
@@ -220,7 +286,12 @@ const Projects = () => {
               <CarouselContent>
                 {filtered.map((repo) => (
                   <CarouselItem key={repo.id}>
-                    <RepoCard repo={repo} />
+                    <RepoCard
+                      repo={repo}
+                      onWatchDemo={demoVideos[repo.name]
+                        ? () => setActiveVideo({ src: demoVideos[repo.name], title: repo.name })
+                        : undefined}
+                    />
                   </CarouselItem>
                 ))}
               </CarouselContent>
@@ -238,7 +309,12 @@ const Projects = () => {
                     exit={{ opacity: 0, scale: 0.95 }}
                     transition={{ duration: 0.4, delay: i * 0.05 }}
                   >
-                    <RepoCard repo={repo} />
+                    <RepoCard
+                      repo={repo}
+                      onWatchDemo={demoVideos[repo.name]
+                        ? () => setActiveVideo({ src: demoVideos[repo.name], title: repo.name })
+                        : undefined}
+                    />
                   </motion.div>
                 ))}
               </AnimatePresence>
@@ -246,6 +322,15 @@ const Projects = () => {
           )
         )}
       </div>
+
+      {/* Video Modal */}
+      {activeVideo && (
+        <VideoModal
+          src={activeVideo.src}
+          title={activeVideo.title}
+          onClose={() => setActiveVideo(null)}
+        />
+      )}
     </section>
   );
 };
