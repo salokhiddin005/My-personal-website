@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 import { ModeToggle } from "@/components/mode-toggle";
 
@@ -12,6 +12,8 @@ const navLinks = [
   { label: "Education", href: "#education" },
   { label: "Contact", href: "#contact" },
 ];
+
+// Gallery section removed — add back when photos are available
 
 const Nav = ({ basePath = "" }: { basePath?: string }) => {
   const [scrolled, setScrolled] = useState(false);
