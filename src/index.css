@@ -1,0 +1,278 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 40 20% 98%;
+    --foreground: 20 6% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 20 6% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 20 6% 10%;
+
+    --primary: 39 62% 40%;
+    --primary-foreground: 40 20% 98%;
+
+    --secondary: 40 10% 94%;
+    --secondary-foreground: 20 6% 10%;
+
+    --muted: 40 10% 92%;
+    --muted-foreground: 20 8% 18%;
+
+    --accent: 39 62% 40%;
+    --accent-foreground: 40 20% 98%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 40 20% 98%;
+
+    --border: 40 10% 88%;
+    --input: 40 10% 88%;
+    --ring: 39 62% 40%;
+
+    --radius: 0.5rem;
+
+    --gold: 39 62% 40%;
+    --gold-light: 39 70% 50%;
+    --gold-dim: 37 54% 30%;
+    --surface: 0 0% 100%;
+    --card-hover: 40 10% 96%;
+    --text-dim: 25 12% 45%;
+
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 20 6% 10%;
+    --sidebar-primary: 39 62% 40%;
+    --sidebar-primary-foreground: 40 20% 98%;
+    --sidebar-accent: 40 10% 94%;
+    --sidebar-accent-foreground: 20 6% 10%;
+    --sidebar-border: 40 10% 88%;
+    --sidebar-ring: 39 62% 40%;
+  }
+
+  .dark {
+    --background: 20 6% 4%;
+    --foreground: 30 30% 87%;
+
+    --card: 30 5% 10%;
+    --card-foreground: 30 30% 87%;
+
+    --popover: 30 5% 10%;
+    --popover-foreground: 30 30% 87%;
+
+    --primary: 39 62% 56%;
+    --primary-foreground: 20 6% 4%;
+
+    --secondary: 30 5% 10%;
+    --secondary-foreground: 30 30% 87%;
+
+    --muted: 25 9% 19%;
+    --muted-foreground: 25 12% 60%;
+
+    --accent: 22 53% 50%;
+    --accent-foreground: 30 30% 87%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 30 30% 87%;
+
+    --border: 25 9% 19%;
+    --input: 25 9% 19%;
+    --ring: 39 62% 56%;
+
+    --gold: 39 62% 56%;
+    --gold-light: 39 75% 67%;
+    --gold-dim: 37 54% 42%;
+    --surface: 30 10% 8%;
+    --card-hover: 20 4% 15%;
+    --text-dim: 25 12% 37%;
+
+    --sidebar-background: 30 5% 10%;
+    --sidebar-foreground: 30 30% 87%;
+    --sidebar-primary: 39 62% 56%;
+    --sidebar-primary-foreground: 20 6% 4%;
+    --sidebar-accent: 20 4% 15%;
+    --sidebar-accent-foreground: 30 30% 87%;
+    --sidebar-border: 25 9% 19%;
+    --sidebar-ring: 39 62% 56%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    overflow-x: hidden;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+
+  code, .font-mono {
+    font-family: 'IBM Plex Mono', monospace;
+  }
+}
+
+/* Grain texture overlay */
+.grain-overlay::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+/* Grid pattern for hero */
+.hero-grid {
+  background-image:
+    linear-gradient(hsl(var(--gold) / 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(var(--gold) / 0.04) 1px, transparent 1px);
+  background-size: 80px 80px;
+}
+
+/* Boost body-font readability in light mode (Cormorant Garamond is thin at 400) */
+:root .font-body {
+  font-weight: 500;
+}
+
+/* Gold pulse animation */
+@keyframes gold-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 hsl(var(--gold) / 0.3); }
+  50% { box-shadow: 0 0 20px 4px hsl(var(--gold) / 0.15); }
+}
+
+.animate-gold-pulse {
+  animation: gold-pulse 3s ease-in-out infinite;
+}
+
+/* Scroll indicator float */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.animate-float {
+  animation: float 2.5s ease-in-out infinite;
+}
+
+/* Gold divider */
+.gold-divider {
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, hsl(var(--gold)), hsl(var(--gold-light)));
+  border-radius: 2px;
+}
+
+/* ── Page-level background (particles + glow + orbs) ── */
+.page-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.page-bg__canvas {
+  position: fixed;
+  inset: 0;
+}
+
+.page-bg__glow,
+.page-bg__orbs {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+}
+
+/* Breathing center light — matches hero's 800×600 radial, 8s sine cycle */
+.page-bg__glow::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 45%;
+  width: 800px;
+  height: 600px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, hsl(var(--gold) / 0.25) 0%, transparent 70%);
+  animation: page-breathe 8s ease-in-out infinite;
+}
+
+@keyframes page-breathe {
+  0%, 100% { opacity: 0.06; }
+  50%      { opacity: 0.14; }
+}
+
+/* Drifting orbs — matches hero's cosine/sine drift paths */
+.page-bg__orbs::before,
+.page-bg__orbs::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+}
+
+/* Orb 1: 500px, gold, blur 120px, 12s orbit (±30px X, ±20px Y) */
+.page-bg__orbs::before {
+  left: 10%;
+  top: 15%;
+  width: 500px;
+  height: 500px;
+  background: hsl(var(--gold) / 0.10);
+  filter: blur(120px);
+  animation: page-drift-1 12s ease-in-out infinite;
+}
+
+/* Orb 2: 400px, orange, blur 100px, 16s orbit (±25px X, ±35px Y) */
+.page-bg__orbs::after {
+  right: 10%;
+  bottom: 10%;
+  width: 400px;
+  height: 400px;
+  background: hsla(22, 53%, 50%, 0.08);
+  filter: blur(100px);
+  animation: page-drift-2 16s ease-in-out infinite;
+}
+
+@keyframes page-drift-1 {
+  0%   { transform: translate(30px, 0); }
+  25%  { transform: translate(0, 20px); }
+  50%  { transform: translate(-30px, 0); }
+  75%  { transform: translate(0, -20px); }
+  100% { transform: translate(30px, 0); }
+}
+
+@keyframes page-drift-2 {
+  0%   { transform: translate(-25px, 0); }
+  25%  { transform: translate(0, -35px); }
+  50%  { transform: translate(25px, 0); }
+  75%  { transform: translate(0, 35px); }
+  100% { transform: translate(-25px, 0); }
+}
+
+@media (max-width: 767px) {
+  .page-bg__glow::before { width: 400px; height: 300px; }
+  .page-bg__orbs::before { width: 250px; height: 250px; filter: blur(80px); }
+  .page-bg__orbs::after { width: 200px; height: 200px; filter: blur(60px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
