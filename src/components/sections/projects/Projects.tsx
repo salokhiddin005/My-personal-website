@@ -1,10 +1,8 @@
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { Star, GitFork, ExternalLink, Code, Play, Image, X } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import SectionTitle from "@/components/common/SectionTitle";
 import ScrollReveal from "@/components/common/ScrollReveal";
-import { useMediaQuery } from "@/hooks/use-mobile";
 import {
   Carousel,
   CarouselContent,
@@ -257,7 +255,6 @@ const Projects = () => {
   const [filter, setFilter] = useState("All");
   const [activeVideo, setActiveVideo] = useState<{ videoId: string; title: string } | null>(null);
   const [activeImage, setActiveImage] = useState<{ imageUrl: string; title: string } | null>(null);
-  const isNarrow = useMediaQuery(640);
   const [carouselApi, setCarouselApi] = useState<CarouselApi>();
 
   const { data: repos = [], isLoading, isError } = useQuery<GitHubRepo[]>({
@@ -330,37 +327,18 @@ const Projects = () => {
           </p>
         )}
 
-        {/* Cards */}
+        {/* Cards — horizontal scroll on all screen sizes */}
         {!isLoading && !isError && (
-          isNarrow ? (
-            <Carousel setApi={setCarouselApi}>
-              <CarouselContent>
-                {filtered.map((repo) => (
-                  <CarouselItem key={repo.id}>
-                    <RepoCard repo={repo} {...getHandlers(repo)} />
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-              <CarouselDots />
-            </Carousel>
-          ) : (
-            <motion.div layout className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              <AnimatePresence mode="popLayout">
-                {filtered.map((repo, i) => (
-                  <motion.div
-                    key={repo.id}
-                    layout
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, scale: 0.95 }}
-                    transition={{ duration: 0.4, delay: i * 0.05 }}
-                  >
-                    <RepoCard repo={repo} {...getHandlers(repo)} />
-                  </motion.div>
-                ))}
-              </AnimatePresence>
-            </motion.div>
-          )
+          <Carousel setApi={setCarouselApi} opts={{ align: "start", dragFree: true }}>
+            <CarouselContent className="-ml-4">
+              {filtered.map((repo) => (
+                <CarouselItem key={repo.id} className="pl-4 basis-[85%] sm:basis-[48%] lg:basis-[32%]">
+                  <RepoCard repo={repo} {...getHandlers(repo)} />
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselDots />
+          </Carousel>
         )}
       </div>
 
