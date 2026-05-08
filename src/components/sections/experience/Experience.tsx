@@ -43,6 +43,14 @@ const Experience = () => (
                   <p className="mt-1 font-mono text-xs text-muted-foreground">
                     {exp.period} · {exp.location}
                   </p>
+                  {exp.email && (
+                    <a
+                      href={`mailto:${exp.email}`}
+                      className="mt-1 inline-block font-mono text-xs text-muted-foreground hover:text-primary transition-colors"
+                    >
+                      {exp.email}
+                    </a>
+                  )}
 
                   <ul className="mt-4 space-y-2">
                     {exp.achievements.map((a, j) => (
