@@ -30,8 +30,7 @@ export const experiences: Experience[] = [
     achievements: [
       "Explored machine learning fundamentals and applied them to real-world datasets",
       "Built web applications integrating AI APIs for automation and productivity",
-      "Studied blockchain technology and its intersection with digital economy systems",
-      "Contributed to academic research in digital transformation and AI adoption",
+"Contributed to academic research in digital transformation and AI adoption",
     ],
     tech: ["Python", "scikit-learn", "TensorFlow", "JavaScript", "React", "Node.js", "SQL"],
   },
