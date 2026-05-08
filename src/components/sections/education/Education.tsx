@@ -12,11 +12,8 @@ const Education = () => (
         <ScrollReveal>
           <div className="rounded-lg border border-border bg-card p-6">
             <h3 className="font-display text-lg sm:text-xl font-bold text-foreground">Tashkent University of Information Technologies</h3>
-            <p className="mt-2 font-body text-sm text-muted-foreground">
-              B.S. Digital Economy
-            </p>
-            <p className="mt-1 font-mono text-xs text-muted-foreground">
-              2021 – 2025 · Tashkent, Uzbekistan
+            <p className="mt-2 font-mono text-xs text-muted-foreground">
+              2021 – Present · Tashkent, Uzbekistan
             </p>
           </div>
         </ScrollReveal>
@@ -36,7 +33,7 @@ const Education = () => (
               responses for knowledge-intensive tasks.
             </p>
             <p className="mt-2 font-mono text-xs text-muted-foreground">
-              2024 – 2025 · Final Year Project
+              2024 – Present · Final Year Project
             </p>
             <div className="mt-3 flex flex-wrap gap-1.5">
               {["LangChain", "pgvector", "OpenAI API", "FastAPI"].map((t) => (
