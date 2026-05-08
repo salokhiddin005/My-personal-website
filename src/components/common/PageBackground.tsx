@@ -91,8 +91,8 @@ const PageBackground = () => {
     const getColors = () => {
       const s = getComputedStyle(document.documentElement);
       return {
-        gold: `hsl(${s.getPropertyValue("--gold").trim()})`,
-        goldDim: `hsl(${s.getPropertyValue("--gold-dim").trim()})`,
+        gold: `hsl(${s.getPropertyValue("--primary").trim()})`,
+        goldDim: `hsl(${s.getPropertyValue("--primary-dim").trim()})`,
       };
     };
 

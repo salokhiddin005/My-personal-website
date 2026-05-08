@@ -1,5 +1,5 @@
-import SectionTitle from "@/components/common/SectionTitle";
 import ScrollReveal from "@/components/common/ScrollReveal";
+import SectionTitle from "@/components/common/SectionTitle";
 import { motion } from "framer-motion";
 import { variants } from "@/lib/animations";
 import { useMediaQuery } from "@/hooks/use-mobile";
@@ -34,15 +34,16 @@ const skillCategories = [
 ];
 
 const SkillCard = ({ cat }: { cat: (typeof skillCategories)[number] }) => (
-  <div className="group h-full rounded-lg border border-border bg-card p-5 transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5">
-    <h3 className="mb-3 font-mono text-xs uppercase tracking-wider text-primary">
+  <div className="group h-full border border-border bg-card p-5 transition-all duration-300 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5">
+    <h3 className="mb-3 font-mono text-[10px] uppercase tracking-[0.35em] text-primary">
+      <span className="mr-1.5 opacity-50">&gt;</span>
       {cat.title}
     </h3>
     <div className="flex flex-wrap gap-1.5">
       {cat.items.map((item) => (
         <span
           key={item}
-          className="rounded-md border border-border bg-surface px-2 py-1 sm:px-2.5 sm:py-1.5 font-mono text-[11px] sm:text-xs text-muted-foreground transition-colors hover:border-primary/20 hover:text-foreground"
+          className="border border-border bg-surface px-2 py-1 font-mono text-[11px] text-muted-foreground transition-colors hover:border-primary/30 hover:text-foreground sm:px-2.5 sm:py-1.5 sm:text-xs"
         >
           {item}
         </span>

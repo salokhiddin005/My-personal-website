@@ -14,9 +14,9 @@ export default {
     },
     extend: {
       fontFamily: {
-        display: ['"Playfair Display"', 'Georgia', 'serif'],
-        body: ['"Cormorant Garamond"', 'Georgia', 'serif'],
-        mono: ['"IBM Plex Mono"', 'monospace'],
+        display: ['"Space Grotesk"', 'system-ui', 'sans-serif'],
+        body: ['"Inter"', 'system-ui', 'sans-serif'],
+        mono: ['"JetBrains Mono"', '"IBM Plex Mono"', 'monospace'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -54,9 +54,9 @@ export default {
           hover: "hsl(var(--card-hover))",
         },
         gold: {
-          DEFAULT: "hsl(var(--gold))",
-          light: "hsl(var(--gold-light))",
-          dim: "hsl(var(--gold-dim))",
+          DEFAULT: "hsl(var(--primary))",
+          light: "hsl(var(--primary))",
+          dim: "hsl(var(--primary-dim))",
         },
         surface: "hsl(var(--surface))",
         "text-dim": "hsl(var(--text-dim))",
@@ -92,5 +92,6 @@ export default {
       },
     },
   },
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   plugins: [require("tailwindcss-animate")],
 } satisfies Config;

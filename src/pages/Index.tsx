@@ -5,18 +5,21 @@ import PageBackground from "@/components/common/PageBackground";
 
 const Index = () => {
   return (
-    <div className="grain-overlay min-h-screen overflow-x-hidden bg-background">
+    <div className="grain-overlay min-h-screen bg-background">
       <PageBackground />
       <Nav />
-      <Hero />
-      <About />
-      <Experience />
-      <Skills />
-      <Projects />
-      <Blog />
-      <Education />
-      <Contact />
-      <Footer />
+      {/* pt-14 offsets the mobile top bar; lg:pl-64 offsets the desktop sidebar */}
+      <main className="relative z-10 pt-14 lg:pl-64 lg:pt-0">
+        <Hero />
+        <About />
+        <Experience />
+        <Skills />
+        <Projects />
+        <Blog />
+        <Education />
+        <Contact />
+        <Footer />
+      </main>
     </div>
   );
 };
