@@ -20,6 +20,10 @@ const skillCategories = [
     items: ["scikit-learn", "PyTorch", "TensorFlow", "Text Classification", "Regression", "Clustering", "Feature Engineering"],
   },
   {
+    title: "Deep Learning",
+    items: ["CNN Architectures", "YOLOv8", "Transfer Learning", "BERT Fine-Tuning", "Transformer Models", "PyTorch", "TensorFlow", "Data Augmentation"],
+  },
+  {
     title: "Data & Databases",
     items: ["PostgreSQL", "Supabase", "Neon", "pgvector", "Pandas", "NumPy", "SQL"],
   },
