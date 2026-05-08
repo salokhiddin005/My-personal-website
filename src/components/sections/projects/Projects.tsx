@@ -60,6 +60,13 @@ const VideoModal = ({ src, title, onClose }: { src: string; title: string; onClo
     return () => document.removeEventListener("keydown", handleKey);
   }, [onClose]);
 
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    video.load();
+    video.play().catch(() => {});
+  }, [src]);
+
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
@@ -81,12 +88,14 @@ const VideoModal = ({ src, title, onClose }: { src: string; title: string; onClo
         {/* Video */}
         <div className="aspect-video bg-black">
           <video
+            key={src}
             ref={videoRef}
             src={src}
             className="h-full w-full object-contain"
             controls
             autoPlay
             playsInline
+            muted
           />
         </div>
       </div>
