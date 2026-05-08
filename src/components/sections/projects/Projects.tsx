@@ -215,7 +215,7 @@ const Projects = () => {
       );
       if (!res.ok) throw new Error("Failed to fetch repos");
       const data: GitHubRepo[] = await res.json();
-      return data.filter((r) => !r.fork);
+      return data.filter((r) => !r.fork && r.name !== "Catching_game");
     },
     staleTime: 1000 * 60 * 5,
   });
