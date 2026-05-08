@@ -20,10 +20,6 @@ const skillCategories = [
     items: ["scikit-learn", "PyTorch", "TensorFlow", "Text Classification", "Regression", "Clustering", "Feature Engineering"],
   },
   {
-    title: "Web Development",
-    items: ["React", "TypeScript", "JavaScript", "Node.js", "FastAPI", "REST API", "Tailwind CSS", "HTML/CSS"],
-  },
-  {
     title: "Data & Databases",
     items: ["PostgreSQL", "MongoDB", "Redis", "pgvector", "Pandas", "NumPy", "SQL"],
   },
