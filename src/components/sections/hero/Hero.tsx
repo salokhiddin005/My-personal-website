@@ -52,22 +52,6 @@ const Hero = () => {
                 </div>
               </motion.div>
 
-              {/* cat about */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.55 }}
-              >
-                <p className="font-mono text-sm text-muted-foreground">
-                  <span className="text-primary">❯</span> cat focus.txt
-                </p>
-                <p className="mt-2 pl-1 font-mono text-xs leading-relaxed text-muted-foreground sm:text-sm">
-                  Building intelligent systems with LLMs, RAG pipelines,
-                  <br className="hidden sm:block" />
-                  {" "}and AI-powered web applications.
-                </p>
-              </motion.div>
-
               {/* CTAs */}
               <motion.div
                 initial={{ opacity: 0 }}
