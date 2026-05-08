@@ -53,6 +53,7 @@ const languageColors: Record<string, string> = {
 
 const VideoModal = ({ src, title, onClose }: { src: string; title: string; onClose: () => void }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
@@ -61,10 +62,12 @@ const VideoModal = ({ src, title, onClose }: { src: string; title: string; onClo
   }, [onClose]);
 
   useEffect(() => {
+    setError(false);
     const video = videoRef.current;
     if (!video) return;
-    video.load();
-    video.play().catch(() => {});
+    const onCanPlay = () => { video.play().catch(() => {}); };
+    video.addEventListener("canplay", onCanPlay, { once: true });
+    return () => video.removeEventListener("canplay", onCanPlay);
   }, [src]);
 
   return (
@@ -86,17 +89,31 @@ const VideoModal = ({ src, title, onClose }: { src: string; title: string; onClo
           </button>
         </div>
         {/* Video */}
-        <div className="aspect-video bg-black">
-          <video
-            key={src}
-            ref={videoRef}
-            src={src}
-            className="h-full w-full object-contain"
-            controls
-            autoPlay
-            playsInline
-            muted
-          />
+        <div className="aspect-video bg-black flex items-center justify-center">
+          {error ? (
+            <div className="text-center">
+              <p className="font-mono text-sm text-muted-foreground">Failed to load video.</p>
+              <a
+                href={src}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-3 inline-block font-mono text-xs text-primary underline"
+              >
+                Open directly →
+              </a>
+            </div>
+          ) : (
+            <video
+              key={src}
+              ref={videoRef}
+              src={src}
+              className="h-full w-full object-contain"
+              controls
+              playsInline
+              muted
+              onError={() => setError(true)}
+            />
+          )}
         </div>
       </div>
     </div>
