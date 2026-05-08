@@ -39,6 +39,7 @@ const demoVideos: Record<string, string> = {
   "Smart-Gym-Monitoring": "Bom7KjaYd4c",
   "IV-drip-drop-counter": "WnNCydph5-k",
   "Bizness-Hisobchi":     "Ael89xyljLo",
+  "Theater-CV":           "67LpXc9h3U8",
 };
 
 const languageColors: Record<string, string> = {
