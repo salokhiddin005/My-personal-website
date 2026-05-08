@@ -52,6 +52,19 @@ const Hero = () => {
                 </div>
               </motion.div>
 
+              {/* description */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.55 }}
+              >
+                <p className="pl-1 font-mono text-xs leading-relaxed text-muted-foreground sm:text-sm">
+                  Building intelligent systems with LLMs, RAG pipelines,
+                  <br className="hidden sm:block" />
+                  {" "}and AI-powered web applications.
+                </p>
+              </motion.div>
+
               {/* CTAs */}
               <motion.div
                 initial={{ opacity: 0 }}
