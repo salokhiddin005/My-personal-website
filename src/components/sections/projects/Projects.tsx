@@ -41,6 +41,11 @@ const demoVideos: Record<string, string> = {
   "Catching_Game_":       "mmdZWo2aztE",
 };
 
+const projectLinks: Record<string, { label: string; url: string }> = {
+  "Bizness-Hisobchi":    { label: "@business_ledger_bot", url: "https://t.me/business_ledger_bot" },
+  "nail-size-detection": { label: "Live Demo ↗", url: "https://nail-size-detection-y5ms.vercel.app" },
+};
+
 const languageColors: Record<string, string> = {
   TypeScript: "#3178c6",
   JavaScript: "#f7df1e",
@@ -201,9 +206,20 @@ const RepoCard = ({
           {displayNames[repo.name] ?? repo.name.replace(/-|_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())}
         </h3>
 
-        <p className="mt-4 mb-6 flex-1 font-body text-sm leading-relaxed text-muted-foreground line-clamp-2">
+        <p className="mt-4 font-body text-sm leading-relaxed text-muted-foreground line-clamp-2">
           {repo.description ?? "No description provided."}
         </p>
+
+        {projectLinks[repo.name] && (
+          <a
+            href={projectLinks[repo.name].url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-2 mb-4 inline-block font-mono text-xs text-primary hover:underline"
+          >
+            {projectLinks[repo.name].label}
+          </a>
+        )}
 
         <div className="mt-auto border-t border-border pt-6 flex flex-col gap-4">
           {hasDemo && (
