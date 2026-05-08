@@ -119,6 +119,18 @@
   }
 }
 
+/* System dark mode — slightly darker than manual dark */
+[data-theme-mode="system"].dark {
+  --background: 222 50% 2%;
+  --card: 222 45% 5%;
+  --popover: 222 45% 5%;
+  --surface: 222 48% 4%;
+  --card-hover: 222 40% 8%;
+  --muted: 220 35% 8%;
+  --border: 220 35% 9%;
+  --input: 220 35% 9%;
+}
+
 /* Tech grid background */
 .tech-grid {
   background-image:

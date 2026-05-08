@@ -35,6 +35,7 @@ export function ThemeProvider({
     const meta = document.querySelector('meta[name="color-scheme"]')
 
     root.classList.remove("light", "dark")
+    root.setAttribute("data-theme-mode", theme)
 
     if (theme === "system") {
       const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
