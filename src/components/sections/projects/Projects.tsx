@@ -29,11 +29,12 @@ const GITHUB_USERNAME = "salokhiddin005";
 
 // Values are YouTube video IDs (the part after ?v= in the YouTube URL)
 const demoVideos: Record<string, string> = {
-  "PPE-Detection": "",
-  "Theater-CV": "",
-  "nail-size-detection": "",
-  "Smart-Gym-Monitoring": "",
-  "Fight_detection": "",
+  "PPE-Detection":        "vCaNWC7eRH8",
+  "Fight_detection":      "3d-h8dMxd-g",
+  "nail-size-detection":  "JoRsSS1znkw",
+  "Smart-Gym-Monitoring": "Bom7KjaYd4c",
+  "IV-drip-drop-counter": "WnNCydph5-k",
+  "Bizness-Hisobchi":     "Ael89xyljLo",
 };
 
 const languageColors: Record<string, string> = {
