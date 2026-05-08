@@ -33,7 +33,8 @@ const displayNames: Record<string, string> = {
 
 // Direct image URLs for repos without video demos
 const demoImages: Record<string, string> = {
-  "House-price-prediction": "https://raw.githubusercontent.com/salokhiddin005/House-price-prediction/main/demo_output.png",
+  "House-price-prediction":    "https://raw.githubusercontent.com/salokhiddin005/House-price-prediction/main/demo_output.png",
+  "employment-classification": "https://raw.githubusercontent.com/salokhiddin005/employment-classification/main/demo_dashboard.png",
 };
 
 // Values are YouTube video IDs (the part after ?v= in the YouTube URL)
