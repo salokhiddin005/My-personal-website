@@ -21,7 +21,7 @@ const skillCategories = [
   },
   {
     title: "Data & Databases",
-    items: ["PostgreSQL", "MongoDB", "Redis", "pgvector", "Pandas", "NumPy", "SQL"],
+    items: ["PostgreSQL", "Supabase", "Neon", "pgvector", "Pandas", "NumPy", "SQL"],
   },
   {
     title: "Tools & DevOps",
