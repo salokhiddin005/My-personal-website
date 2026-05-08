@@ -47,7 +47,7 @@ const Index = () => {
       <Nav />
       <main
         id="page-scroll-container"
-        className="relative z-10 flex h-full overflow-x-auto overflow-y-hidden pt-14 lg:pl-64 lg:pt-0 no-scrollbar"
+        className="relative z-10 flex h-full overflow-x-auto overflow-y-hidden pt-14 lg:ml-64 lg:pt-0 no-scrollbar"
         style={{ scrollSnapType: "x mandatory", scrollBehavior: "smooth" } as React.CSSProperties}
       >
         <Slide><Hero /></Slide>
