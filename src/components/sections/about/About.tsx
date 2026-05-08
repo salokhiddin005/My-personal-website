@@ -41,7 +41,7 @@ const About = () => (
               {[
                 { label: "Location", value: "Uzbekistan" },
                 { label: "Education", value: "TUIT (2025)" },
-                { label: "Focus", value: "AI/ML Engineering & Web Development" },
+                { label: "Focus", value: "AI/ML Engineering" },
                 { label: "Languages", value: "Uzbek (Native), English (Advanced), Russian" },
               ].map((item) => (
                 <div key={item.label}>

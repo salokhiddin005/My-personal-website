@@ -13,7 +13,7 @@ import {
 const skillCategories = [
   {
     title: "AI & LLMs",
-    items: ["OpenAI API", "LangChain", "RAG", "Prompt Engineering", "Hugging Face Transformers", "BERT Fine-Tuning", "Embedding Models"],
+    items: ["OpenAI API", "RAG", "Prompt Engineering", "Hugging Face Transformers", "BERT Fine-Tuning", "Embedding Models"],
   },
   {
     title: "Machine Learning",
@@ -24,16 +24,12 @@ const skillCategories = [
     items: ["React", "TypeScript", "JavaScript", "Node.js", "FastAPI", "REST API", "Tailwind CSS", "HTML/CSS"],
   },
   {
-    title: "Blockchain & Web3",
-    items: ["Blockchain Fundamentals", "Smart Contracts", "Solidity", "Web3.js", "Decentralized Apps (DApps)", "Digital Economy"],
-  },
-  {
     title: "Data & Databases",
     items: ["PostgreSQL", "MongoDB", "Redis", "pgvector", "Pandas", "NumPy", "SQL"],
   },
   {
     title: "Tools & DevOps",
-    items: ["Python", "Docker", "Git", "GitHub Actions", "Linux", "VS Code", "Jupyter Notebook"],
+    items: ["Python", "Docker", "Git", "GitHub Actions", "VS Code", "Jupyter Notebook"],
   },
 ];
 

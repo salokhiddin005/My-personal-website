@@ -72,7 +72,7 @@ const VideoModal = ({ src, title, onClose }: { src: string; title: string; onClo
         {/* Header */}
         <div className="flex items-center justify-between border-b border-border px-5 py-3">
           <span className="font-mono text-xs uppercase tracking-widest text-primary">
-            {title.replace(/-|_/g, " ")}
+            {title.replace(/-|_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())}
           </span>
           <button onClick={onClose} className="text-muted-foreground hover:text-foreground transition-colors">
             <X className="h-4 w-4" />
@@ -143,7 +143,7 @@ const RepoCard = ({ repo, onWatchDemo }: { repo: GitHubRepo; onWatchDemo?: () =>
       {/* Content Body */}
       <div className="flex flex-1 flex-col p-5 sm:p-6 md:p-8">
         <h3 className="font-display text-2xl font-bold leading-tight italic text-foreground line-clamp-2">
-          {repo.name.replace(/-|_/g, " ")}
+          {repo.name.replace(/-|_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())}
         </h3>
 
         <p className="mt-4 mb-6 flex-1 font-body text-sm leading-relaxed text-muted-foreground line-clamp-2">
