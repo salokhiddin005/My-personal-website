@@ -40,6 +40,7 @@ const demoVideos: Record<string, string> = {
   "IV-drip-drop-counter": "WnNCydph5-k",
   "Bizness-Hisobchi":     "Ael89xyljLo",
   "Theater-CV":           "67LpXc9h3U8",
+  "Catching_Game_":       "mmdZWo2aztE",
 };
 
 const languageColors: Record<string, string> = {
