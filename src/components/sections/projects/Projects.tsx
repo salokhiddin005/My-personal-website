@@ -260,7 +260,7 @@ const Projects = () => {
       const res = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=100`);
       if (!res.ok) throw new Error("Failed to fetch repos");
       const data: GitHubRepo[] = await res.json();
-      const excluded = new Set(["Catching_game", "Face-recognition-project", "My-personal-website"]);
+      const excluded = new Set(["Catching_game", "Face-recognition-project", "My-personal-website", "Attendance-tracking-project"]);
       return data.filter((r) => !r.fork && !excluded.has(r.name));
     },
     staleTime: 1000 * 60 * 5,
