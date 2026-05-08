@@ -106,9 +106,17 @@ const RepoCard = ({ repo, onWatchDemo }: { repo: GitHubRepo; onWatchDemo?: () =>
         rel="noopener noreferrer"
         className="relative aspect-video w-full overflow-hidden bg-muted/30 block"
       >
-        <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-primary/5 to-transparent">
-          <Code className="h-10 w-10 text-primary/40" />
-        </div>
+        {hasDemo ? (
+          <img
+            src={`https://img.youtube.com/vi/${demoVideos[repo.name]}/hqdefault.jpg`}
+            alt={repo.name}
+            className="h-full w-full object-cover"
+          />
+        ) : (
+          <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-primary/5 to-transparent">
+            <Code className="h-10 w-10 text-primary/40" />
+          </div>
+        )}
 
         {/* Hover Overlay */}
         <div className="absolute inset-0 flex items-center justify-center bg-primary/10 opacity-0 backdrop-blur-[2px] transition-opacity duration-500 group-hover:opacity-100">
