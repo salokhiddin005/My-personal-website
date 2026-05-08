@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import Nav from "@/components/layout/Nav";
 import { Hero, About, Experience, Projects, Skills, Blog, Education, Contact } from "@/components/sections";
 import Footer from "@/components/layout/Footer";
@@ -13,35 +12,7 @@ const Slide = ({ children }: { children: React.ReactNode }) => (
   </div>
 );
 
-const Index = () => {
-  useEffect(() => {
-    const container = document.getElementById("page-scroll-container");
-    if (!container) return;
-
-    let locked = false;
-
-    const handleWheel = (e: WheelEvent) => {
-      e.preventDefault();
-      if (locked) return;
-      locked = true;
-
-      const slideWidth = container.clientWidth;
-      const current = Math.round(container.scrollLeft / slideWidth);
-
-      if (e.deltaY > 0) {
-        container.scrollTo({ left: (current + 1) * slideWidth, behavior: "smooth" });
-      } else if (e.deltaY < 0) {
-        container.scrollTo({ left: Math.max(0, (current - 1) * slideWidth), behavior: "smooth" });
-      }
-
-      setTimeout(() => { locked = false; }, 800);
-    };
-
-    container.addEventListener("wheel", handleWheel, { passive: false });
-    return () => container.removeEventListener("wheel", handleWheel);
-  }, []);
-
-  return (
+const Index = () => (
     <div className="grain-overlay h-screen overflow-hidden bg-background">
       <PageBackground />
       <Nav />
@@ -60,7 +31,6 @@ const Index = () => {
         <Slide><Contact /><Footer /></Slide>
       </main>
     </div>
-  );
-};
+);
 
 export default Index;
