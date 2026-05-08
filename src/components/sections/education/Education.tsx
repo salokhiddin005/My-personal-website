@@ -12,9 +12,6 @@ const Education = () => (
         <ScrollReveal>
           <div className="rounded-lg border border-border bg-card p-6">
             <h3 className="font-display text-lg sm:text-xl font-bold text-foreground">Tashkent University of Information Technologies</h3>
-            <p className="mt-1 font-body text-sm text-primary">
-              Faculty of Digital Economy
-            </p>
             <p className="mt-2 font-body text-sm text-muted-foreground">
               B.S. Digital Economy
             </p>
