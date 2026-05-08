@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Star, GitFork, ExternalLink, Code, Play, X } from "lucide-react";
+import { Star, GitFork, ExternalLink, Code, Play, Image, X } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import SectionTitle from "@/components/common/SectionTitle";
 import ScrollReveal from "@/components/common/ScrollReveal";
@@ -29,6 +29,11 @@ const GITHUB_USERNAME = "salokhiddin005";
 
 const displayNames: Record<string, string> = {
   "Bizness-Hisobchi": "Cashflow Telegram Bot",
+};
+
+// Direct image URLs for repos without video demos
+const demoImages: Record<string, string> = {
+  "House-price-prediction": "https://raw.githubusercontent.com/salokhiddin005/House-price-prediction/main/demo_output.png",
 };
 
 // Values are YouTube video IDs (the part after ?v= in the YouTube URL)
@@ -77,7 +82,7 @@ const VideoModal = ({ videoId, title, onClose }: { videoId: string; title: strin
       >
         <div className="flex items-center justify-between border-b border-border px-5 py-3">
           <span className="font-mono text-xs uppercase tracking-widest text-primary">
-            {title.replace(/-|_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())}
+            {displayNames[title] ?? title.replace(/-|_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())}
           </span>
           <button onClick={onClose} className="text-muted-foreground hover:text-foreground transition-colors">
             <X className="h-4 w-4" />
@@ -97,11 +102,61 @@ const VideoModal = ({ videoId, title, onClose }: { videoId: string; title: strin
   );
 };
 
-const RepoCard = ({ repo, onWatchDemo }: { repo: GitHubRepo; onWatchDemo?: () => void }) => {
-  const langColor = repo.language
-    ? (languageColors[repo.language] ?? "#6366f1")
-    : "#6366f1";
-  const hasDemo = !!demoVideos[repo.name];
+const ImageModal = ({ imageUrl, title, onClose }: { imageUrl: string; title: string; onClose: () => void }) => {
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
+    document.addEventListener("keydown", handleKey);
+    return () => document.removeEventListener("keydown", handleKey);
+  }, [onClose]);
+
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm p-4"
+      onClick={onClose}
+    >
+      <div
+        className="relative w-full max-w-4xl border border-border bg-card"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex items-center justify-between border-b border-border px-5 py-3">
+          <span className="font-mono text-xs uppercase tracking-widest text-primary">
+            {displayNames[title] ?? title.replace(/-|_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())}
+          </span>
+          <button onClick={onClose} className="text-muted-foreground hover:text-foreground transition-colors">
+            <X className="h-4 w-4" />
+          </button>
+        </div>
+        <div className="bg-black flex items-center justify-center p-4">
+          <img
+            src={imageUrl}
+            alt={title}
+            className="max-h-[75vh] w-full object-contain"
+          />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const RepoCard = ({
+  repo,
+  onWatchDemo,
+  onViewPreview,
+}: {
+  repo: GitHubRepo;
+  onWatchDemo?: () => void;
+  onViewPreview?: () => void;
+}) => {
+  const langColor = repo.language ? (languageColors[repo.language] ?? "#6366f1") : "#6366f1";
+  const hasVideo = !!demoVideos[repo.name];
+  const hasImage = !!demoImages[repo.name];
+  const hasDemo = hasVideo || hasImage;
+
+  const thumbnail = hasVideo
+    ? `https://img.youtube.com/vi/${demoVideos[repo.name]}/hqdefault.jpg`
+    : hasImage
+    ? demoImages[repo.name]
+    : null;
 
   return (
     <div className="group flex h-full w-full flex-col overflow-hidden border border-border bg-card transition-all duration-500 hover:border-primary/40 hover:shadow-xl hover:shadow-primary/5">
@@ -112,12 +167,8 @@ const RepoCard = ({ repo, onWatchDemo }: { repo: GitHubRepo; onWatchDemo?: () =>
         rel="noopener noreferrer"
         className="relative aspect-video w-full overflow-hidden bg-muted/30 block"
       >
-        {hasDemo ? (
-          <img
-            src={`https://img.youtube.com/vi/${demoVideos[repo.name]}/hqdefault.jpg`}
-            alt={repo.name}
-            className="h-full w-full object-cover"
-          />
+        {thumbnail ? (
+          <img src={thumbnail} alt={repo.name} className="h-full w-full object-cover" />
         ) : (
           <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-primary/5 to-transparent">
             <Code className="h-10 w-10 text-primary/40" />
@@ -127,9 +178,7 @@ const RepoCard = ({ repo, onWatchDemo }: { repo: GitHubRepo; onWatchDemo?: () =>
         {/* Hover Overlay */}
         <div className="absolute inset-0 flex items-center justify-center bg-primary/10 opacity-0 backdrop-blur-[2px] transition-opacity duration-500 group-hover:opacity-100">
           <div className="translate-y-4 flex items-center gap-2 border border-primary/20 bg-background/80 px-5 py-3 transition-transform duration-500 group-hover:translate-y-0">
-            <span className="font-mono text-xs uppercase tracking-wider text-primary">
-              View on GitHub
-            </span>
+            <span className="font-mono text-xs uppercase tracking-wider text-primary">View on GitHub</span>
             <ExternalLink className="h-4 w-4 text-primary" />
           </div>
         </div>
@@ -139,11 +188,7 @@ const RepoCard = ({ repo, onWatchDemo }: { repo: GitHubRepo; onWatchDemo?: () =>
           <div className="absolute left-4 top-4 z-10">
             <span
               className="inline-block border px-3 py-1 font-mono text-[10px] uppercase tracking-wider backdrop-blur-md"
-              style={{
-                borderColor: `${langColor}40`,
-                color: langColor,
-                backgroundColor: `${langColor}18`,
-              }}
+              style={{ borderColor: `${langColor}40`, color: langColor, backgroundColor: `${langColor}18` }}
             >
               {repo.language}
             </span>
@@ -162,31 +207,24 @@ const RepoCard = ({ repo, onWatchDemo }: { repo: GitHubRepo; onWatchDemo?: () =>
         </p>
 
         <div className="mt-auto border-t border-border pt-6 flex flex-col gap-4">
-          {/* Watch Demo button */}
           {hasDemo && (
             <button
-              onClick={onWatchDemo}
+              onClick={hasVideo ? onWatchDemo : onViewPreview}
               className="flex items-center justify-center gap-2 border border-primary/40 bg-primary/10 px-4 py-2 font-mono text-[10px] uppercase tracking-widest text-primary transition-all duration-300 hover:bg-primary hover:text-primary-foreground"
             >
-              <Play className="h-3 w-3" />
-              Watch Demo
+              {hasVideo ? <Play className="h-3 w-3" /> : <Image className="h-3 w-3" />}
+              {hasVideo ? "Watch Demo" : "View Preview"}
             </button>
           )}
 
           <div className="flex items-center justify-between">
-            {/* Topics */}
             <div className="flex flex-wrap gap-2">
               {repo.topics.slice(0, 2).map((topic) => (
-                <span
-                  key={topic}
-                  className="font-mono text-[10px] uppercase tracking-tighter text-muted-foreground"
-                >
+                <span key={topic} className="font-mono text-[10px] uppercase tracking-tighter text-muted-foreground">
                   #{topic}
                 </span>
               ))}
             </div>
-
-            {/* Stars & Forks */}
             <div className="flex items-center gap-3">
               {repo.stargazers_count > 0 && (
                 <span className="flex items-center gap-1 font-mono text-[10px] font-bold uppercase tracking-wider text-primary">
@@ -211,19 +249,14 @@ const RepoCard = ({ repo, onWatchDemo }: { repo: GitHubRepo; onWatchDemo?: () =>
 const Projects = () => {
   const [filter, setFilter] = useState("All");
   const [activeVideo, setActiveVideo] = useState<{ videoId: string; title: string } | null>(null);
+  const [activeImage, setActiveImage] = useState<{ imageUrl: string; title: string } | null>(null);
   const isNarrow = useMediaQuery(640);
   const [carouselApi, setCarouselApi] = useState<CarouselApi>();
 
-  const {
-    data: repos = [],
-    isLoading,
-    isError,
-  } = useQuery<GitHubRepo[]>({
+  const { data: repos = [], isLoading, isError } = useQuery<GitHubRepo[]>({
     queryKey: ["github-repos", GITHUB_USERNAME],
     queryFn: async () => {
-      const res = await fetch(
-        `https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=100`
-      );
+      const res = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=100`);
       if (!res.ok) throw new Error("Failed to fetch repos");
       const data: GitHubRepo[] = await res.json();
       return data.filter((r) => !r.fork && r.name !== "Catching_game");
@@ -231,19 +264,21 @@ const Projects = () => {
     staleTime: 1000 * 60 * 5,
   });
 
-  const languages = [
-    "All",
-    ...Array.from(
-      new Set(repos.map((r) => r.language).filter(Boolean))
-    ) as string[],
-  ];
-
-  const filtered =
-    filter === "All" ? repos : repos.filter((r) => r.language === filter);
+  const languages = ["All", ...Array.from(new Set(repos.map((r) => r.language).filter(Boolean))) as string[]];
+  const filtered = filter === "All" ? repos : repos.filter((r) => r.language === filter);
 
   useEffect(() => {
     if (carouselApi) carouselApi.scrollTo(0);
   }, [filter, carouselApi]);
+
+  const getHandlers = (repo: GitHubRepo) => ({
+    onWatchDemo: demoVideos[repo.name]
+      ? () => setActiveVideo({ videoId: demoVideos[repo.name], title: repo.name })
+      : undefined,
+    onViewPreview: demoImages[repo.name]
+      ? () => setActiveImage({ imageUrl: demoImages[repo.name], title: repo.name })
+      : undefined,
+  });
 
   return (
     <section id="projects" className="scroll-mt-20 px-6 py-16 md:py-24">
@@ -275,10 +310,7 @@ const Projects = () => {
         {isLoading && (
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {[...Array(6)].map((_, i) => (
-              <div
-                key={i}
-                className="h-72 animate-pulse border border-border bg-muted/30"
-              />
+              <div key={i} className="h-72 animate-pulse border border-border bg-muted/30" />
             ))}
           </div>
         )}
@@ -297,12 +329,7 @@ const Projects = () => {
               <CarouselContent>
                 {filtered.map((repo) => (
                   <CarouselItem key={repo.id}>
-                    <RepoCard
-                      repo={repo}
-                      onWatchDemo={demoVideos[repo.name]
-                        ? () => setActiveVideo({ videoId: demoVideos[repo.name], title: repo.name })
-                        : undefined}
-                    />
+                    <RepoCard repo={repo} {...getHandlers(repo)} />
                   </CarouselItem>
                 ))}
               </CarouselContent>
@@ -320,12 +347,7 @@ const Projects = () => {
                     exit={{ opacity: 0, scale: 0.95 }}
                     transition={{ duration: 0.4, delay: i * 0.05 }}
                   >
-                    <RepoCard
-                      repo={repo}
-                      onWatchDemo={demoVideos[repo.name]
-                        ? () => setActiveVideo({ videoId: demoVideos[repo.name], title: repo.name })
-                        : undefined}
-                    />
+                    <RepoCard repo={repo} {...getHandlers(repo)} />
                   </motion.div>
                 ))}
               </AnimatePresence>
@@ -334,13 +356,11 @@ const Projects = () => {
         )}
       </div>
 
-      {/* Video Modal */}
       {activeVideo && (
-        <VideoModal
-          videoId={activeVideo.videoId}
-          title={activeVideo.title}
-          onClose={() => setActiveVideo(null)}
-        />
+        <VideoModal videoId={activeVideo.videoId} title={activeVideo.title} onClose={() => setActiveVideo(null)} />
+      )}
+      {activeImage && (
+        <ImageModal imageUrl={activeImage.imageUrl} title={activeImage.title} onClose={() => setActiveImage(null)} />
       )}
     </section>
   );
