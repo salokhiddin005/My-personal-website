@@ -27,6 +27,10 @@ interface GitHubRepo {
 
 const GITHUB_USERNAME = "salokhiddin005";
 
+const displayNames: Record<string, string> = {
+  "Bizness-Hisobchi": "Cashflow Telegram Bot",
+};
+
 // Values are YouTube video IDs (the part after ?v= in the YouTube URL)
 const demoVideos: Record<string, string> = {
   "PPE-Detection":        "vCaNWC7eRH8",
@@ -148,7 +152,7 @@ const RepoCard = ({ repo, onWatchDemo }: { repo: GitHubRepo; onWatchDemo?: () =>
       {/* Content Body */}
       <div className="flex flex-1 flex-col p-5 sm:p-6 md:p-8">
         <h3 className="font-display text-2xl font-bold leading-tight italic text-foreground line-clamp-2">
-          {repo.name.replace(/-|_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())}
+          {displayNames[repo.name] ?? repo.name.replace(/-|_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())}
         </h3>
 
         <p className="mt-4 mb-6 flex-1 font-body text-sm leading-relaxed text-muted-foreground line-clamp-2">
