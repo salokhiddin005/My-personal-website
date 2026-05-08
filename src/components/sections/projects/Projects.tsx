@@ -148,6 +148,7 @@ const RepoCard = ({
   onWatchDemo?: () => void;
   onViewPreview?: () => void;
 }) => {
+  const [imgError, setImgError] = useState(false);
   const langColor = repo.language ? (languageColors[repo.language] ?? "#6366f1") : "#6366f1";
   const hasVideo = !!demoVideos[repo.name];
   const hasImage = !!demoImages[repo.name];
@@ -168,8 +169,13 @@ const RepoCard = ({
         rel="noopener noreferrer"
         className="relative aspect-video w-full overflow-hidden bg-muted/30 block"
       >
-        {thumbnail ? (
-          <img src={thumbnail} alt={repo.name} className="h-full w-full object-cover" />
+        {thumbnail && !imgError ? (
+          <img
+            src={thumbnail}
+            alt={repo.name}
+            className="h-full w-full object-cover"
+            onError={() => setImgError(true)}
+          />
         ) : (
           <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-primary/5 to-transparent">
             <Code className="h-10 w-10 text-primary/40" />
