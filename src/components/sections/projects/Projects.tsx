@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Star, GitFork, ExternalLink, Code, Play, X } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
@@ -27,12 +27,13 @@ interface GitHubRepo {
 
 const GITHUB_USERNAME = "salokhiddin005";
 
+// Values are YouTube video IDs (the part after ?v= in the YouTube URL)
 const demoVideos: Record<string, string> = {
-  "PPE-Detection": "https://ik.imagekit.io/ssqt6ora1/ppe-detection.mp4?updatedAt=1778165778708",
-  "Theater-CV": "https://ik.imagekit.io/ssqt6ora1/theater_cv.mp4?updatedAt=1778165450677",
-  "nail-size-detection": "https://ik.imagekit.io/ssqt6ora1/nailytics.mp4?updatedAt=1778165387251",
-  "Smart-Gym-Monitoring": "https://ik.imagekit.io/ssqt6ora1/test_1_annotated.mp4?updatedAt=1778164914119",
-  "Fight_detection": "https://ik.imagekit.io/ssqt6ora1/fight_nonfight.mp4?updatedAt=1778164827110",
+  "PPE-Detection": "",
+  "Theater-CV": "",
+  "nail-size-detection": "",
+  "Smart-Gym-Monitoring": "",
+  "Fight_detection": "",
 };
 
 const languageColors: Record<string, string> = {
@@ -51,24 +52,12 @@ const languageColors: Record<string, string> = {
   Kotlin: "#A97BFF",
 };
 
-const VideoModal = ({ src, title, onClose }: { src: string; title: string; onClose: () => void }) => {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [error, setError] = useState(false);
-
+const VideoModal = ({ videoId, title, onClose }: { videoId: string; title: string; onClose: () => void }) => {
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
     document.addEventListener("keydown", handleKey);
     return () => document.removeEventListener("keydown", handleKey);
   }, [onClose]);
-
-  useEffect(() => {
-    setError(false);
-    const video = videoRef.current;
-    if (!video) return;
-    const onCanPlay = () => { video.play().catch(() => {}); };
-    video.addEventListener("canplay", onCanPlay, { once: true });
-    return () => video.removeEventListener("canplay", onCanPlay);
-  }, [src]);
 
   return (
     <div
@@ -79,7 +68,6 @@ const VideoModal = ({ src, title, onClose }: { src: string; title: string; onClo
         className="relative w-full max-w-4xl border border-border bg-card"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Header */}
         <div className="flex items-center justify-between border-b border-border px-5 py-3">
           <span className="font-mono text-xs uppercase tracking-widest text-primary">
             {title.replace(/-|_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())}
@@ -88,32 +76,14 @@ const VideoModal = ({ src, title, onClose }: { src: string; title: string; onClo
             <X className="h-4 w-4" />
           </button>
         </div>
-        {/* Video */}
-        <div className="aspect-video bg-black flex items-center justify-center">
-          {error ? (
-            <div className="text-center">
-              <p className="font-mono text-sm text-muted-foreground">Failed to load video.</p>
-              <a
-                href={src}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-3 inline-block font-mono text-xs text-primary underline"
-              >
-                Open directly →
-              </a>
-            </div>
-          ) : (
-            <video
-              key={src}
-              ref={videoRef}
-              src={src}
-              className="h-full w-full object-contain"
-              controls
-              playsInline
-              muted
-              onError={() => setError(true)}
-            />
-          )}
+        <div className="aspect-video bg-black">
+          <iframe
+            key={videoId}
+            src={`https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`}
+            className="h-full w-full"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
         </div>
       </div>
     </div>
@@ -225,7 +195,7 @@ const RepoCard = ({ repo, onWatchDemo }: { repo: GitHubRepo; onWatchDemo?: () =>
 
 const Projects = () => {
   const [filter, setFilter] = useState("All");
-  const [activeVideo, setActiveVideo] = useState<{ src: string; title: string } | null>(null);
+  const [activeVideo, setActiveVideo] = useState<{ videoId: string; title: string } | null>(null);
   const isNarrow = useMediaQuery(640);
   const [carouselApi, setCarouselApi] = useState<CarouselApi>();
 
@@ -315,7 +285,7 @@ const Projects = () => {
                     <RepoCard
                       repo={repo}
                       onWatchDemo={demoVideos[repo.name]
-                        ? () => setActiveVideo({ src: demoVideos[repo.name], title: repo.name })
+                        ? () => setActiveVideo({ videoId: demoVideos[repo.name], title: repo.name })
                         : undefined}
                     />
                   </CarouselItem>
@@ -338,7 +308,7 @@ const Projects = () => {
                     <RepoCard
                       repo={repo}
                       onWatchDemo={demoVideos[repo.name]
-                        ? () => setActiveVideo({ src: demoVideos[repo.name], title: repo.name })
+                        ? () => setActiveVideo({ videoId: demoVideos[repo.name], title: repo.name })
                         : undefined}
                     />
                   </motion.div>
@@ -352,7 +322,7 @@ const Projects = () => {
       {/* Video Modal */}
       {activeVideo && (
         <VideoModal
-          src={activeVideo.src}
+          videoId={activeVideo.videoId}
           title={activeVideo.title}
           onClose={() => setActiveVideo(null)}
         />
