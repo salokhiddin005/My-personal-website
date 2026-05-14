@@ -272,8 +272,21 @@ const Projects = () => {
       const res = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=100`);
       if (!res.ok) throw new Error("Failed to fetch repos");
       const data: GitHubRepo[] = await res.json();
-      const excluded = new Set(["Catching_game", "Face-recognition-project", "My-personal-website", "Attendance-tracking-project"]);
-      return data.filter((r) => !r.fork && !excluded.has(r.name));
+      const allowed = new Set([
+        "employment-classification",
+        "House-price-prediction",
+        "Catching_Game_",
+        "Fight_detection",
+        "PPE-Detection",
+        "Theater-CV",
+        "nail-size-detection",
+        "IV-drip-drop-counter",
+        "Smart-Gym-Monitoring",
+        "Password-Manager",
+        "Text-To-Speech",
+        "Bizness-Hisobchi",
+      ]);
+      return data.filter((r) => allowed.has(r.name));
     },
     staleTime: 1000 * 60 * 5,
   });
