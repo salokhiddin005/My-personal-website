@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Star, GitFork, ExternalLink, Code, Play, Image, X } from "lucide-react";
-import { useQuery } from "@tanstack/react-query";
 import SectionTitle from "@/components/common/SectionTitle";
 import ScrollReveal from "@/components/common/ScrollReveal";
 
@@ -16,8 +15,6 @@ interface GitHubRepo {
   topics: string[];
   fork: boolean;
 }
-
-const GITHUB_USERNAME = "salokhiddin005";
 
 const displayNames: Record<string, string> = {
   "Bizness-Hisobchi": "Cashflow Telegram Bot",
@@ -266,30 +263,21 @@ const Projects = () => {
   const [activeVideo, setActiveVideo] = useState<{ videoId: string; title: string } | null>(null);
   const [activeImage, setActiveImage] = useState<{ imageUrl: string; title: string } | null>(null);
 
-  const { data: repos = [], isLoading, isError } = useQuery<GitHubRepo[]>({
-    queryKey: ["github-repos", GITHUB_USERNAME],
-    queryFn: async () => {
-      const res = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=100`);
-      if (!res.ok) throw new Error("Failed to fetch repos");
-      const data: GitHubRepo[] = await res.json();
-      const allowed = new Set([
-        "employment-classification",
-        "House-price-prediction",
-        "Catching_Game_",
-        "Fight_detection",
-        "PPE-Detection",
-        "Theater-CV",
-        "nail-size-detection",
-        "IV-drip-drop-counter",
-        "Smart-Gym-Monitoring",
-        "Password-Manager",
-        "Text-To-Speech",
-        "Bizness-Hisobchi",
-      ]);
-      return data.filter((r) => allowed.has(r.name));
-    },
-    staleTime: 1000 * 60 * 5,
-  });
+  const repos: GitHubRepo[] = [
+    { id: 1201128514, name: "Fight_detection", description: "Real-time fight and violence detection using computer vision", html_url: "https://github.com/salokhiddin005/Fight_detection", language: "Python", stargazers_count: 0, forks_count: 0, topics: [], fork: false },
+    { id: 1198071383, name: "PPE-Detection", description: "Personal Protective Equipment detection system for workplace safety", html_url: "https://github.com/salokhiddin005/PPE-Detection", language: "Python", stargazers_count: 0, forks_count: 0, topics: [], fork: false },
+    { id: 1218642007, name: "Theater-CV", description: "Computer vision application for theater venue monitoring", html_url: "https://github.com/salokhiddin005/Theater-CV", language: "Python", stargazers_count: 0, forks_count: 0, topics: [], fork: false },
+    { id: 1211307048, name: "nail-size-detection", description: "Computer vision model for detecting and measuring nail sizes", html_url: "https://github.com/salokhiddin005/nail-size-detection", language: "TypeScript", stargazers_count: 0, forks_count: 0, topics: [], fork: false },
+    { id: 1220842292, name: "IV-drip-drop-counter", description: "Computer vision system for counting IV drip drops in medical settings", html_url: "https://github.com/salokhiddin005/IV-drip-drop-counter", language: "Python", stargazers_count: 0, forks_count: 0, topics: [], fork: false },
+    { id: 1223624774, name: "Smart-Gym-Monitoring", description: "AI-powered gym monitoring system using computer vision", html_url: "https://github.com/salokhiddin005/Smart-Gym-Monitoring", language: "Python", stargazers_count: 0, forks_count: 0, topics: [], fork: false },
+    { id: 1221642157, name: "Password-Manager", description: "Secure password manager application", html_url: "https://github.com/salokhiddin005/Password-Manager", language: "Python", stargazers_count: 0, forks_count: 0, topics: [], fork: false },
+    { id: 1226340429, name: "Text-To-Speech", description: "Text-to-speech conversion application", html_url: "https://github.com/salokhiddin005/Text-To-Speech", language: "Python", stargazers_count: 0, forks_count: 0, topics: [], fork: false },
+    { id: 1221582841, name: "Bizness-Hisobchi", description: "Business accounting application for tracking income and expenses", html_url: "https://github.com/salokhiddin005/Bizness-Hisobchi", language: "Python", stargazers_count: 0, forks_count: 0, topics: [], fork: false },
+    { id: 1165411911, name: "employment-classification", description: "ML classification model for employment data analysis", html_url: "https://github.com/salokhiddin005/employment-classification", language: "Jupyter Notebook", stargazers_count: 0, forks_count: 0, topics: [], fork: false },
+    { id: 1165413179, name: "House-price-prediction", description: "Machine learning model for predicting house prices", html_url: "https://github.com/salokhiddin005/House-price-prediction", language: "Jupyter Notebook", stargazers_count: 0, forks_count: 0, topics: [], fork: false },
+  ];
+  const isLoading = false;
+  const isError = false;
 
   const languages = ["All", ...Array.from(new Set(repos.map((r) => r.language).filter(Boolean))) as string[]];
   const filtered = filter === "All" ? repos : repos.filter((r) => r.language === filter);
