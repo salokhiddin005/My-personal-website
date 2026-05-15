@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface SectionTitleProps {
   overline: string;
@@ -6,42 +7,20 @@ interface SectionTitleProps {
   id?: string;
 }
 
-const useTypewriter = (target: string) => {
-  const [text, setText] = useState("");
-  const [done, setDone] = useState(false);
+const SectionTitle = ({ overline, title, id }: SectionTitleProps) => {
+  const [visible, setVisible] = useState(false);
   const ref = useRef<HTMLHeadingElement>(null);
-  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-
-    const run = () => {
-      setText("");
-      setDone(false);
-      let i = 0;
-      const tick = () => {
-        i++;
-        setText(target.slice(0, i));
-        if (i < target.length) { timer.current = setTimeout(tick, 38); }
-        else setDone(true);
-      };
-      timer.current = setTimeout(tick, 120);
-    };
-
     const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) run(); },
+      ([entry]) => { if (entry.isIntersecting) setVisible(true); else setVisible(false); },
       { threshold: 0.6 }
     );
     observer.observe(el);
-    return () => { observer.disconnect(); if (timer.current) clearTimeout(timer.current); };
-  }, [target]);
-
-  return { text, done, ref };
-};
-
-const SectionTitle = ({ overline, title, id }: SectionTitleProps) => {
-  const { text, done, ref } = useTypewriter(title);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <div id={id} className="mb-12 scroll-mt-20 md:mb-16">
@@ -49,9 +28,30 @@ const SectionTitle = ({ overline, title, id }: SectionTitleProps) => {
         <span className="mr-2 opacity-50">//</span>
         {overline}
       </p>
-      <h2 ref={ref} className="font-display text-2xl font-bold text-foreground sm:text-3xl md:text-4xl">
-        {text}
-        {!done && <span className="animate-blink text-primary">|</span>}
+      <h2 ref={ref} className="font-display text-2xl font-bold text-foreground sm:text-3xl md:text-4xl overflow-hidden">
+        <span className="inline-flex flex-wrap gap-x-[0.25em]">
+          {title.split(" ").map((word, wi) => (
+            <span key={wi} className="overflow-hidden inline-block">
+              <AnimatePresence>
+                {visible && (
+                  <motion.span
+                    className="inline-block"
+                    initial={{ y: "100%", opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ y: "100%", opacity: 0 }}
+                    transition={{
+                      duration: 0.55,
+                      ease: [0.25, 0.1, 0.25, 1],
+                      delay: wi * 0.1,
+                    }}
+                  >
+                    {word}
+                  </motion.span>
+                )}
+              </AnimatePresence>
+            </span>
+          ))}
+        </span>
       </h2>
       <div className="mt-3 h-px w-12 bg-primary/50" />
     </div>
