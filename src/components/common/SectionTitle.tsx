@@ -6,10 +6,9 @@ interface SectionTitleProps {
   id?: string;
 }
 
-const CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%&*<>";
-
-const useScramble = (target: string) => {
-  const [text, setText] = useState(target);
+const useTypewriter = (target: string) => {
+  const [text, setText] = useState("");
+  const [done, setDone] = useState(false);
   const ref = useRef<HTMLHeadingElement>(null);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -17,37 +16,32 @@ const useScramble = (target: string) => {
     const el = ref.current;
     if (!el) return;
 
-    const runScramble = () => {
-      let iter = 0;
-      const total = target.replace(/ /g, "").length * 4;
+    const run = () => {
+      setText("");
+      setDone(false);
+      let i = 0;
       const tick = () => {
-        setText(
-          target.split("").map((char, i) => {
-            if (char === " ") return " ";
-            if (i < iter / 4) return char;
-            return CHARS[Math.floor(Math.random() * CHARS.length)];
-          }).join("")
-        );
-        iter++;
-        if (iter <= total) { timer.current = setTimeout(tick, 28); }
-        else setText(target);
+        i++;
+        setText(target.slice(0, i));
+        if (i < target.length) { timer.current = setTimeout(tick, 38); }
+        else setDone(true);
       };
-      tick();
+      timer.current = setTimeout(tick, 120);
     };
 
     const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) runScramble(); },
+      ([entry]) => { if (entry.isIntersecting) run(); },
       { threshold: 0.6 }
     );
     observer.observe(el);
     return () => { observer.disconnect(); if (timer.current) clearTimeout(timer.current); };
   }, [target]);
 
-  return { text, ref };
+  return { text, done, ref };
 };
 
 const SectionTitle = ({ overline, title, id }: SectionTitleProps) => {
-  const { text, ref } = useScramble(title);
+  const { text, done, ref } = useTypewriter(title);
 
   return (
     <div id={id} className="mb-12 scroll-mt-20 md:mb-16">
@@ -57,6 +51,7 @@ const SectionTitle = ({ overline, title, id }: SectionTitleProps) => {
       </p>
       <h2 ref={ref} className="font-display text-2xl font-bold text-foreground sm:text-3xl md:text-4xl">
         {text}
+        {!done && <span className="animate-blink text-primary">|</span>}
       </h2>
       <div className="mt-3 h-px w-12 bg-primary/50" />
     </div>
