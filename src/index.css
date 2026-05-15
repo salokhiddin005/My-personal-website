@@ -278,6 +278,13 @@
   100% { transform: translate(-25px, 0); }
 }
 
+/* Custom cursor — hide default on desktop */
+@media (min-width: 768px) {
+  .cursor-none-desktop, .cursor-none-desktop * {
+    cursor: none !important;
+  }
+}
+
 /* Hide scrollbar utility */
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }

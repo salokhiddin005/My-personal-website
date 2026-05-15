@@ -1,5 +1,6 @@
 import SectionTitle from "@/components/common/SectionTitle";
 import ScrollReveal from "@/components/common/ScrollReveal";
+import Counter from "@/components/common/Counter";
 
 const About = () => (
   <section className="px-6 py-16 md:py-24">
@@ -53,6 +54,23 @@ const About = () => (
           </div>
         </ScrollReveal>
       </div>
+
+      {/* Animated stats */}
+      <ScrollReveal delay={0.3}>
+        <div className="mt-12 grid grid-cols-2 gap-6 sm:grid-cols-4 border-t border-border pt-10">
+          {[
+            { end: 11, suffix: "+", label: "AI Projects Built" },
+            { end: 5,  suffix: "+", label: "CV Systems Deployed" },
+            { end: 3,  suffix: "",  label: "Industries Served" },
+            { end: 3,  suffix: "",  label: "Languages Spoken" },
+          ].map(({ end, suffix, label }) => (
+            <div key={label} className="text-center">
+              <Counter end={end} suffix={suffix} />
+              <p className="mt-1 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">{label}</p>
+            </div>
+          ))}
+        </div>
+      </ScrollReveal>
     </div>
   </section>
 );

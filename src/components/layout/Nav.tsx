@@ -64,6 +64,25 @@ const SidebarNav = ({
   </nav>
 );
 
+const CurrentlyBuilding = () => (
+  <div className="border-t border-border px-5 py-4">
+    <div className="flex items-center gap-2 mb-3">
+      <span className="h-1.5 w-1.5 rounded-full bg-green-400 animate-pulse flex-shrink-0" />
+      <span className="font-mono text-[9px] uppercase tracking-[0.35em] text-muted-foreground">
+        Currently Building
+      </span>
+    </div>
+    <ul className="space-y-2">
+      {["Scam Call Detector", "AI Roof Visualizer", "Smart Package Room"].map((p) => (
+        <li key={p} className="flex items-start gap-2">
+          <span className="mt-1.5 h-1 w-1 rounded-full bg-primary/40 flex-shrink-0" />
+          <span className="font-mono text-[10px] text-muted-foreground/70 leading-snug">{p}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+);
+
 const SidebarBottom = () => (
   <div className="border-t border-border px-5 py-4">
     <div className="flex items-center gap-3">
@@ -123,6 +142,7 @@ const Nav = ({ basePath = "" }: { basePath?: string }) => {
           </p>
         </div>
         <SidebarNav active={active} basePath={basePath} />
+        <CurrentlyBuilding />
         <SidebarBottom />
       </aside>
 
