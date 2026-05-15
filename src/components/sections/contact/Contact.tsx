@@ -46,6 +46,12 @@ const Contact = () => (
           </a>
         </div>
 
+        <div className="mt-8 flex items-center gap-4">
+          <div className="h-px flex-1 bg-border" />
+          <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">Resume</span>
+          <div className="h-px flex-1 bg-border" />
+        </div>
+
         <div className="mt-4 flex flex-col sm:flex-row justify-center gap-3">
           <a
             href="/resume-en.pdf"
