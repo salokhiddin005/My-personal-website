@@ -278,6 +278,15 @@
   100% { transform: translate(-25px, 0); }
 }
 
+/* Ripple click effect */
+@keyframes ripple {
+  0%   { width: 0;    height: 0;    opacity: 0.55; }
+  100% { width: 90px; height: 90px; opacity: 0; }
+}
+.animate-ripple {
+  animation: ripple 0.65s ease-out forwards;
+}
+
 /* Custom cursor — hide default on desktop */
 @media (min-width: 768px) {
   .cursor-none-desktop, .cursor-none-desktop * {

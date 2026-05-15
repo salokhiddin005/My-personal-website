@@ -1,7 +1,21 @@
+import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 
 const Hero = () => {
+  const parallaxRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleMove = (e: MouseEvent) => {
+      if (!parallaxRef.current) return;
+      const x = (e.clientX / window.innerWidth - 0.5) * 18;
+      const y = (e.clientY / window.innerHeight - 0.5) * 12;
+      parallaxRef.current.style.transform = `translate(${x}px, ${y}px)`;
+    };
+    window.addEventListener("mousemove", handleMove);
+    return () => window.removeEventListener("mousemove", handleMove);
+  }, []);
+
   return (
     <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-6 pt-6 lg:pt-0">
       {/* Tech grid */}
@@ -11,6 +25,7 @@ const Hero = () => {
       <div className="absolute left-1/2 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/8 blur-[120px]" />
 
       <div className="relative z-10 w-full max-w-2xl">
+        <div ref={parallaxRef} style={{ transition: "transform 0.12s ease-out" }}>
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
@@ -104,6 +119,7 @@ const Hero = () => {
             </span>
           </div>
         </motion.div>
+        </div>
       </div>
 
       {/* Scroll indicator */}

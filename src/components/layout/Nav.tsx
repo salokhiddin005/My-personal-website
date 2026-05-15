@@ -64,6 +64,26 @@ const SidebarNav = ({
   </nav>
 );
 
+const LocalTime = () => {
+  const [time, setTime] = useState("");
+  useEffect(() => {
+    const update = () => setTime(
+      new Date().toLocaleTimeString("en-US", { timeZone: "Asia/Tashkent", hour: "2-digit", minute: "2-digit", hour12: false })
+    );
+    update();
+    const id = setInterval(update, 1000);
+    return () => clearInterval(id);
+  }, []);
+  return (
+    <div className="px-5 py-3 border-b border-border">
+      <p className="font-mono text-[9px] uppercase tracking-[0.35em] text-muted-foreground/50">My Time</p>
+      <p className="mt-0.5 font-mono text-sm font-bold text-primary">
+        {time} <span className="text-[10px] font-normal text-muted-foreground">UZT</span>
+      </p>
+    </div>
+  );
+};
+
 const CurrentlyBuilding = () => (
   <div className="border-t border-border px-5 py-4">
     <div className="flex items-center gap-2 mb-3">
@@ -141,6 +161,7 @@ const Nav = ({ basePath = "" }: { basePath?: string }) => {
             AI / ML Engineer
           </p>
         </div>
+        <LocalTime />
         <SidebarNav active={active} basePath={basePath} />
         <CurrentlyBuilding />
         <SidebarBottom />

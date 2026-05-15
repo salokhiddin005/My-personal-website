@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Star, GitFork, ExternalLink, Code, Play, Image, X } from "lucide-react";
 import SectionTitle from "@/components/common/SectionTitle";
@@ -143,6 +143,25 @@ const RepoCard = ({
   onViewPreview?: () => void;
 }) => {
   const [imgError, setImgError] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const rect = cardRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    const x = (e.clientY - rect.top) / rect.height - 0.5;
+    const y = (e.clientX - rect.left) / rect.width - 0.5;
+    if (cardRef.current) {
+      cardRef.current.style.transform = `perspective(900px) rotateX(${-x * 14}deg) rotateY(${y * 14}deg)`;
+      cardRef.current.style.transition = "transform 0.08s ease-out";
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (cardRef.current) {
+      cardRef.current.style.transform = "perspective(900px) rotateX(0deg) rotateY(0deg)";
+      cardRef.current.style.transition = "transform 0.45s ease-out";
+    }
+  };
   const langColor = repo.language ? (languageColors[repo.language] ?? "#6366f1") : "#6366f1";
   const hasVideo = !!demoVideos[repo.name];
   const hasImage = !!demoImages[repo.name];
@@ -155,7 +174,7 @@ const RepoCard = ({
     : null;
 
   return (
-    <div className="group flex h-full w-full flex-col overflow-hidden border border-border bg-card transition-all duration-500 hover:border-primary/40 hover:shadow-xl hover:shadow-primary/5">
+    <div ref={cardRef} onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave} className="group flex h-full w-full flex-col overflow-hidden border border-border bg-card transition-all duration-500 hover:border-primary/40 hover:shadow-xl hover:shadow-primary/5">
       {/* Image Header */}
       <a
         href={repo.html_url}
