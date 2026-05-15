@@ -9,30 +9,30 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
-    title: "Building a RAG-Based Q&A System: From Document Upload to Grounded Answers",
-    category: "LLM Engineering",
+    title: "Building a Scam Call Detector with n8n, Twilio, and OpenAI",
+    category: "AI Automation",
+    date: "Coming Soon",
+    readTime: "9 min read",
+    excerpt:
+      "How I'm wiring together n8n, Twilio, and OpenAI to make and receive calls, transcribe conversations in real time, score scam risk, and fire alerts — a fully automated phone-call AI agent with no manual review.",
+    comingSoon: true,
+  },
+  {
+    title: "AI Roof Visualization: Detecting Roof Areas and Applying Realistic Materials from a Single Photo",
+    category: "Computer Vision",
     date: "Coming Soon",
     readTime: "10 min read",
     excerpt:
-      "A practical walkthrough of building a retrieval-augmented generation pipeline — chunking, embedding, vector search with pgvector, and source-cited LLM responses.",
+      "A deep dive into building a web-based roof visualizer — segmenting roof regions from uploaded house photos, then applying roofing colors and materials while preserving real-world lighting, shadows, and perspective.",
     comingSoon: true,
   },
   {
-    title: "Text Classification with Transformers vs. TF-IDF: A Practical Comparison",
-    category: "NLP",
+    title: "Smart Package Room Monitor: Detecting People Carrying Packages with Video Analytics",
+    category: "Edge AI",
     date: "Coming Soon",
-    readTime: "8 min read",
+    readTime: "11 min read",
     excerpt:
-      "When should you fine-tune BERT vs. use a simple TF-IDF + Logistic Regression baseline? A hands-on comparison with real benchmark results and deployment considerations.",
-    comingSoon: true,
-  },
-  {
-    title: "How I Built an AI Chatbot with Persistent Memory Using LangChain",
-    category: "AI Development",
-    date: "Coming Soon",
-    readTime: "7 min read",
-    excerpt:
-      "Step-by-step guide to building a context-aware conversational AI — covering LangChain memory modules, FastAPI streaming, and integrating everything into a React frontend.",
+      "Designing a video analytics system for residential package rooms — detecting people carrying boxes, bags, and envelopes, tracking entry events, and pushing structured alerts to a backend in real time.",
     comingSoon: true,
   },
 ];
