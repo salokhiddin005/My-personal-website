@@ -1,6 +1,6 @@
 import SectionTitle from "@/components/common/SectionTitle";
 import ScrollReveal from "@/components/common/ScrollReveal";
-import { Github, Linkedin, Mail } from "lucide-react";
+import { Github, Linkedin, Mail, Download } from "lucide-react";
 
 const Contact = () => (
   <section className="px-6 py-16 md:py-24">
@@ -43,6 +43,25 @@ const Contact = () => (
           >
             <Github className="h-4 w-4" />
             GitHub
+          </a>
+        </div>
+
+        <div className="mt-4 flex flex-col sm:flex-row justify-center gap-3">
+          <a
+            href="/resume-en.pdf"
+            download
+            className="inline-flex w-full sm:w-auto justify-center items-center gap-2 rounded-lg border border-primary/40 px-8 py-4 sm:py-3 font-body text-sm font-semibold text-primary transition-colors hover:border-primary hover:bg-primary/10"
+          >
+            <Download className="h-4 w-4" />
+            Download Resume (EN)
+          </a>
+          <a
+            href="/resume-ru.pdf"
+            download
+            className="inline-flex w-full sm:w-auto justify-center items-center gap-2 rounded-lg border border-primary/40 px-8 py-4 sm:py-3 font-body text-sm font-semibold text-primary transition-colors hover:border-primary hover:bg-primary/10"
+          >
+            <Download className="h-4 w-4" />
+            Download Resume (RU)
           </a>
         </div>
       </ScrollReveal>
