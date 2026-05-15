@@ -18,7 +18,9 @@ const Contact = () => (
       <ScrollReveal delay={0.15}>
         <div className="mt-8 flex flex-col sm:flex-row flex-wrap justify-center gap-3">
           <a
-            href="mailto:saloxiddingopirjonov@gmail.com"
+            href="https://mail.google.com/mail/?view=cm&fs=1&to=saloxiddingopirjonov@gmail.com"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex w-full sm:w-auto justify-center items-center gap-2 rounded-lg bg-primary px-8 py-4 sm:py-3 font-body text-sm font-semibold text-primary-foreground transition-colors hover:bg-gold-light"
           >
             <Mail className="h-4 w-4" />
