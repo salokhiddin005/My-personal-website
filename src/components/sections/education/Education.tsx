@@ -22,21 +22,21 @@ const Education = () => (
         <ScrollReveal delay={0.15}>
           <div className="rounded-lg border border-primary/20 bg-card p-6">
             <p className="mb-2 font-mono text-xs uppercase tracking-wider text-primary">
-              Graduation Project
+              Capstone Project
             </p>
             <h3 className="font-display text-lg sm:text-xl font-bold text-foreground">
-              AI-Powered RAG Q&A System
+              Nail Size Detection
             </h3>
             <p className="mt-2 font-body text-sm leading-relaxed text-muted-foreground">
-              Built a retrieval-augmented generation system for intelligent document question
-              answering — combining vector search with LLMs to deliver accurate, source-grounded
-              responses for knowledge-intensive tasks.
+              Computer vision system that detects and measures nail sizes in real time —
+              combining object detection with precise dimensional analysis for industrial
+              quality control applications.
             </p>
             <p className="mt-2 font-mono text-xs text-muted-foreground">
-              2024 – Present · Final Year Project
+              2024 – Present · Capstone Project
             </p>
             <div className="mt-3 flex flex-wrap gap-1.5">
-              {["LangChain", "pgvector", "OpenAI API", "FastAPI"].map((t) => (
+              {["Computer Vision", "TypeScript", "YOLOv8", "Vercel"].map((t) => (
                 <Tag key={t} variant="gold">{t}</Tag>
               ))}
             </div>
