@@ -9,6 +9,9 @@ import ProgressBar from "@/components/common/ProgressBar";
 import SlideDots from "@/components/common/SlideDots";
 import SlideAnnouncement from "@/components/common/SlideAnnouncement";
 import RippleEffect from "@/components/common/RippleEffect";
+import AmbientGlow from "@/components/common/AmbientGlow";
+import ParticleCanvas from "@/components/common/ParticleCanvas";
+import SectionTint from "@/components/common/SectionTint";
 
 const TOTAL_SLIDES = 8;
 
@@ -49,10 +52,13 @@ const Index = () => {
       {!loading && (
         <div className="grain-overlay h-screen overflow-hidden bg-background">
           <CustomCursor />
+          <AmbientGlow />
           <ProgressBar />
           <SlideDots />
           <SlideAnnouncement />
           <RippleEffect />
+          <ParticleCanvas />
+          <SectionTint />
           <PageBackground />
           <Nav />
           <main

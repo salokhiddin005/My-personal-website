@@ -1,52 +1,108 @@
+import { useEffect, useRef, useState } from "react";
 import ScrollReveal from "@/components/common/ScrollReveal";
 import SectionTitle from "@/components/common/SectionTitle";
 import { motion } from "framer-motion";
 import { variants } from "@/lib/animations";
 import { useMediaQuery } from "@/hooks/use-mobile";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselDots,
-} from "@/components/ui/carousel";
+import { Carousel, CarouselContent, CarouselItem, CarouselDots } from "@/components/ui/carousel";
 
 const skillCategories = [
   {
     title: "AI & LLMs",
-    items: ["OpenAI API", "RAG", "Prompt Engineering", "Hugging Face Transformers", "BERT Fine-Tuning", "Embedding Models"],
+    skills: [
+      { name: "OpenAI API", level: 92 },
+      { name: "RAG Systems", level: 88 },
+      { name: "Prompt Engineering", level: 90 },
+      { name: "Hugging Face", level: 82 },
+      { name: "Embedding Models", level: 84 },
+    ],
   },
   {
     title: "Machine Learning",
-    items: ["scikit-learn", "PyTorch", "TensorFlow", "Text Classification", "Regression", "Clustering", "Feature Engineering"],
+    skills: [
+      { name: "scikit-learn", level: 90 },
+      { name: "PyTorch", level: 80 },
+      { name: "TensorFlow", level: 72 },
+      { name: "Text Classification", level: 88 },
+      { name: "Feature Engineering", level: 82 },
+    ],
   },
   {
     title: "Deep Learning",
-    items: ["CNN Architectures", "YOLOv8", "Transfer Learning", "BERT Fine-Tuning", "Transformer Models", "PyTorch", "TensorFlow", "Data Augmentation"],
+    skills: [
+      { name: "YOLOv8", level: 92 },
+      { name: "CNN Architectures", level: 84 },
+      { name: "Transfer Learning", level: 86 },
+      { name: "Transformer Models", level: 78 },
+      { name: "Data Augmentation", level: 80 },
+    ],
   },
   {
     title: "Data & Databases",
-    items: ["PostgreSQL", "Supabase", "Neon", "pgvector", "Pandas", "NumPy", "SQL"],
+    skills: [
+      { name: "Python / Pandas", level: 94 },
+      { name: "PostgreSQL", level: 85 },
+      { name: "pgvector", level: 80 },
+      { name: "SQL", level: 88 },
+      { name: "NumPy", level: 90 },
+    ],
   },
   {
     title: "Tools & DevOps",
-    items: ["Python", "Docker", "Git", "GitHub Actions", "VS Code", "Jupyter Notebook"],
+    skills: [
+      { name: "Git / GitHub", level: 90 },
+      { name: "Docker", level: 78 },
+      { name: "FastAPI", level: 88 },
+      { name: "GitHub Actions", level: 75 },
+      { name: "Jupyter Notebook", level: 92 },
+    ],
   },
 ];
 
+const SkillBar = ({ name, level, delay }: { name: string; level: number; delay: number }) => {
+  const [filled, setFilled] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setTimeout(() => setFilled(true), delay); },
+      { threshold: 0.5 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [delay]);
+
+  return (
+    <div ref={ref}>
+      <div className="flex justify-between mb-1">
+        <span className="font-mono text-[11px] text-muted-foreground">{name}</span>
+        <span className="font-mono text-[11px] text-primary">{filled ? `${level}%` : "0%"}</span>
+      </div>
+      <div className="h-1 rounded-full bg-border overflow-hidden">
+        <div
+          className="h-full rounded-full bg-primary"
+          style={{
+            width: filled ? `${level}%` : "0%",
+            transition: "width 0.9s cubic-bezier(0.25, 0.1, 0.25, 1)",
+            boxShadow: filled ? "0 0 8px 1px hsl(var(--primary) / 0.5)" : "none",
+          }}
+        />
+      </div>
+    </div>
+  );
+};
+
 const SkillCard = ({ cat }: { cat: (typeof skillCategories)[number] }) => (
   <div className="group h-full border border-border bg-card p-5 transition-all duration-300 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5">
-    <h3 className="mb-3 font-mono text-[10px] uppercase tracking-[0.35em] text-primary">
+    <h3 className="mb-4 font-mono text-[10px] uppercase tracking-[0.35em] text-primary">
       <span className="mr-1.5 opacity-50">&gt;</span>
       {cat.title}
     </h3>
-    <div className="flex flex-wrap gap-1.5">
-      {cat.items.map((item) => (
-        <span
-          key={item}
-          className="border border-border bg-surface px-2 py-1 font-mono text-[11px] text-muted-foreground transition-colors hover:border-primary/30 hover:text-foreground sm:px-2.5 sm:py-1.5 sm:text-xs"
-        >
-          {item}
-        </span>
+    <div className="space-y-3">
+      {cat.skills.map((skill, i) => (
+        <SkillBar key={skill.name} name={skill.name} level={skill.level} delay={i * 80} />
       ))}
     </div>
   </div>

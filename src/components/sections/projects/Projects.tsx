@@ -156,10 +156,20 @@ const RepoCard = ({
     }
   };
 
+  const handleMouseEnter = () => {
+    if (cardRef.current) {
+      cardRef.current.style.boxShadow = `0 0 22px 2px ${langColor}44, 0 0 50px 6px ${langColor}18`;
+      cardRef.current.style.borderColor = `${langColor}70`;
+      cardRef.current.style.transition = "box-shadow 0.3s ease-out, border-color 0.3s ease-out";
+    }
+  };
+
   const handleMouseLeave = () => {
     if (cardRef.current) {
       cardRef.current.style.transform = "perspective(900px) rotateX(0deg) rotateY(0deg)";
-      cardRef.current.style.transition = "transform 0.45s ease-out";
+      cardRef.current.style.boxShadow = "";
+      cardRef.current.style.borderColor = "";
+      cardRef.current.style.transition = "transform 0.45s ease-out, box-shadow 0.45s ease-out, border-color 0.45s ease-out";
     }
   };
   const langColor = repo.language ? (languageColors[repo.language] ?? "#6366f1") : "#6366f1";
@@ -174,7 +184,7 @@ const RepoCard = ({
     : null;
 
   return (
-    <div ref={cardRef} onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave} className="group flex h-full w-full flex-col overflow-hidden border border-border bg-card transition-all duration-500 hover:border-primary/40 hover:shadow-xl hover:shadow-primary/5">
+    <div ref={cardRef} onMouseMove={handleMouseMove} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="group flex h-full w-full flex-col overflow-hidden border border-border bg-card transition-all duration-500">
       {/* Image Header */}
       <a
         href={repo.html_url}
@@ -281,6 +291,14 @@ const Projects = () => {
   const [filter, setFilter] = useState("All");
   const [activeVideo, setActiveVideo] = useState<{ videoId: string; title: string } | null>(null);
   const [activeImage, setActiveImage] = useState<{ imageUrl: string; title: string } | null>(null);
+  const [spotlight, setSpotlight] = useState({ x: 0, y: 0, active: false });
+  const gridRef = useRef<HTMLDivElement>(null);
+
+  const handleGridMouseMove = (e: React.MouseEvent) => {
+    const rect = gridRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    setSpotlight({ x: e.clientX - rect.left, y: e.clientY - rect.top, active: true });
+  };
 
   const repos: GitHubRepo[] = [
     { id: 1201128514, name: "Fight_detection", description: "Real-time fight and violence detection using computer vision", html_url: "https://github.com/salokhiddin005/Fight_detection", language: "Python", stargazers_count: 0, forks_count: 0, topics: [], fork: false },
@@ -355,6 +373,19 @@ const Projects = () => {
 
         {/* Cards grid */}
         {!isLoading && !isError && (
+          <div
+            ref={gridRef}
+            className="relative"
+            onMouseMove={handleGridMouseMove}
+            onMouseLeave={() => setSpotlight(s => ({ ...s, active: false }))}
+          >
+            <div
+              className="pointer-events-none absolute inset-0 z-10 transition-opacity duration-300 rounded-lg"
+              style={{
+                opacity: spotlight.active ? 1 : 0,
+                background: `radial-gradient(500px circle at ${spotlight.x}px ${spotlight.y}px, hsl(var(--primary) / 0.07), transparent 50%)`,
+              }}
+            />
           <motion.div layout className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             <AnimatePresence mode="popLayout">
               {filtered.map((repo, i) => (
@@ -371,6 +402,7 @@ const Projects = () => {
               ))}
             </AnimatePresence>
           </motion.div>
+          </div>
         )}
       </div>
 
