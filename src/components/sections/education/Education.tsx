@@ -13,7 +13,7 @@ const Education = () => (
           <div className="rounded-lg border border-border bg-card p-6">
             <h3 className="font-display text-lg sm:text-xl font-bold text-foreground">Tashkent University of Information Technologies</h3>
             <p className="mt-2 font-mono text-xs text-muted-foreground">
-              2021 – Present · Tashkent, Uzbekistan
+              2023 – Present · Tashkent, Uzbekistan
             </p>
           </div>
         </ScrollReveal>
