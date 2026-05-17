@@ -7,7 +7,21 @@ const About = () => (
     <div className="mx-auto max-w-6xl">
       <SectionTitle overline="About Me" title="Passionate About AI & Modern Tech" id="about" />
 
-      <div className="grid grid-cols-1 gap-8 md:gap-12 md:grid-cols-5">
+      <div className="grid grid-cols-1 gap-8 md:gap-12 md:grid-cols-6">
+        {/* Profile photo */}
+        <ScrollReveal className="flex justify-center md:col-span-1 md:justify-start md:pt-2">
+          <div className="relative">
+            <div className="h-36 w-36 overflow-hidden rounded-full border-2 border-primary/40 ring-4 ring-primary/10">
+              <img
+                src="/profile.jpeg"
+                alt="Saloxiddin G'opirjonov"
+                className="h-full w-full object-cover"
+              />
+            </div>
+            <span className="absolute bottom-1 right-1 flex h-3 w-3 rounded-full bg-primary ring-2 ring-background" />
+          </div>
+        </ScrollReveal>
+
         {/* Prose */}
         <div className="space-y-5 md:col-span-3">
           <ScrollReveal>
