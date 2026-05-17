@@ -26,24 +26,25 @@ const About = () => (
         <div className="space-y-5 md:col-span-3">
           <ScrollReveal>
             <p className="font-body text-base md:text-lg leading-relaxed text-muted-foreground">
-              I am a 4th-year student at Tashkent University of Information Technologies
-              with a strong interest in artificial intelligence, blockchain, web development, and
-              modern technologies.
+              I am a 4th-year student at Tashkent University of Information Technologies,
+              specializing in artificial intelligence and machine learning. I combine a strong
+              theoretical foundation with hands-on engineering experience across the full AI
+              product lifecycle — from research and prototyping to deployment.
             </p>
           </ScrollReveal>
           <ScrollReveal delay={0.1}>
             <p className="font-body text-base md:text-lg leading-relaxed text-muted-foreground">
-              I have hands-on experience using AI tools to build real projects — from conversational
-              chatbots and RAG-based knowledge systems to text classification pipelines and
-              AI-powered web applications. I focus on turning ideas into working products efficiently
-              and intelligently.
+              I build production-grade AI systems end-to-end — spanning LLM integration, RAG
+              pipelines, computer vision models, and full-stack web applications. My focus is on
+              clean architecture, efficient inference, and real-world deployability rather than
+              theoretical complexity alone.
             </p>
           </ScrollReveal>
           <ScrollReveal delay={0.2}>
             <p className="font-body text-base md:text-lg leading-relaxed text-muted-foreground">
-              I'm a fast learner, responsible, and deeply motivated to grow in the technology field.
-              I believe in solving real problems with practical AI — building systems that are not
-              just smart, but useful and reliable.
+              I'm driven by the challenge of transforming ideas into reliable, scalable products.
+              Whether working independently or within a team, I bring precision, adaptability,
+              and a commitment to delivering AI solutions that solve genuine problems.
             </p>
           </ScrollReveal>
         </div>
