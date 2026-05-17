@@ -1,9 +1,10 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, ChevronRight } from "lucide-react";
 
 const Hero = () => {
   const parallaxRef = useRef<HTMLDivElement>(null);
+  const [showSwipeHint, setShowSwipeHint] = useState(true);
 
   useEffect(() => {
     const handleMove = (e: MouseEvent) => {
@@ -14,6 +15,11 @@ const Hero = () => {
     };
     window.addEventListener("mousemove", handleMove);
     return () => window.removeEventListener("mousemove", handleMove);
+  }, []);
+
+  useEffect(() => {
+    const t = setTimeout(() => setShowSwipeHint(false), 2500);
+    return () => clearTimeout(t);
   }, []);
 
   return (
@@ -148,9 +154,17 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 animate-float">
+      {/* Desktop scroll indicator */}
+      <div className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 animate-float hidden lg:block">
         <ChevronDown className="h-5 w-5 text-muted-foreground" />
+      </div>
+
+      {/* Mobile swipe hint */}
+      <div
+        className={`absolute bottom-16 right-6 z-10 flex items-center gap-1.5 lg:hidden transition-opacity duration-700 ${showSwipeHint ? "opacity-100" : "opacity-0 pointer-events-none"}`}
+      >
+        <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">swipe</span>
+        <ChevronRight className="h-3.5 w-3.5 text-primary animate-pulse" />
       </div>
     </section>
   );

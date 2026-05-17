@@ -20,21 +20,31 @@ const SlideDots = () => {
     container?.scrollTo({ left: i * container.clientWidth, behavior: "smooth" });
   };
 
+  const dots = Array.from({ length: TOTAL_SLIDES }).map((_, i) => (
+    <button
+      key={i}
+      onClick={() => goTo(i)}
+      aria-label={`Go to slide ${i + 1}`}
+      className={`rounded-full transition-all duration-300 ${
+        i === active
+          ? "bg-primary shadow-[0_0_8px_2px] shadow-primary/50 lg:h-3 lg:w-3 h-2.5 w-2.5"
+          : "bg-muted-foreground/25 hover:bg-primary/50 lg:h-2 lg:w-2 h-2 w-2"
+      }`}
+    />
+  ));
+
   return (
-    <div className="fixed right-5 top-1/2 -translate-y-1/2 z-50 hidden lg:flex flex-col gap-2.5">
-      {Array.from({ length: TOTAL_SLIDES }).map((_, i) => (
-        <button
-          key={i}
-          onClick={() => goTo(i)}
-          aria-label={`Go to slide ${i + 1}`}
-          className={`rounded-full transition-all duration-300 ${
-            i === active
-              ? "h-3 w-3 bg-primary shadow-[0_0_8px_2px] shadow-primary/50"
-              : "h-2 w-2 bg-muted-foreground/25 hover:bg-primary/50"
-          }`}
-        />
-      ))}
-    </div>
+    <>
+      {/* Desktop: vertical on the right */}
+      <div className="fixed right-5 top-1/2 -translate-y-1/2 z-50 hidden lg:flex flex-col gap-2.5">
+        {dots}
+      </div>
+
+      {/* Mobile: horizontal at the bottom */}
+      <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 flex lg:hidden flex-row gap-2.5">
+        {dots}
+      </div>
+    </>
   );
 };
 
