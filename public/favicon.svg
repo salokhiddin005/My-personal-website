@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Dark background -->
+  <rect width="32" height="32" fill="#0d1117"/>
+  <!-- Cyan border -->
+  <rect x="1.5" y="1.5" width="29" height="29" fill="none" stroke="#00c8ff" stroke-width="1" opacity="0.5"/>
+  <!-- SG initials -->
+  <text
+    x="16"
+    y="21.5"
+    font-family="monospace, 'Courier New'"
+    font-size="13"
+    font-weight="bold"
+    fill="#00c8ff"
+    text-anchor="middle"
+    letter-spacing="0.5"
+  >SG</text>
+</svg>
