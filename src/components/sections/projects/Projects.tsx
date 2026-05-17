@@ -35,6 +35,7 @@ const demoVideos: Record<string, string> = {
   "IV-drip-drop-counter": "WnNCydph5-k",
   "Bizness-Hisobchi":     "Ael89xyljLo",
   "Theater-CV":           "67LpXc9h3U8",
+  "Password-Manager":     "ZefUlDRZEV0",
   "Catching_Game_":       "mmdZWo2aztE",
 };
 
