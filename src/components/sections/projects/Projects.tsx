@@ -41,6 +41,7 @@ const demoVideos: Record<string, string> = {
 const projectLinks: Record<string, { label: string; url: string }> = {
   "Bizness-Hisobchi":    { label: "@business_ledger_bot", url: "https://t.me/business_ledger_bot" },
   "nail-size-detection": { label: "Live Demo ↗", url: "https://nail-size-detection-y5ms.vercel.app" },
+  "Text-To-Speech":      { label: "🤗 Live Demo on Hugging Face ↗", url: "https://huggingface.co/spaces/saloxiddin005/tts-demo" },
 };
 
 const languageColors: Record<string, string> = {
