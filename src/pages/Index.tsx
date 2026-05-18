@@ -57,12 +57,22 @@ const useWheelNav = (enabled: boolean) => {
     if (!enabled) return;
     let isScrolling = false;
     const handleWheel = (e: WheelEvent) => {
-      e.preventDefault();
-      if (isScrolling) return;
       const container = document.getElementById("page-scroll-container");
       if (!container) return;
+      const slides = getSlides();
       const current = getCurrentIndex(container);
-      const next = e.deltaY > 0
+      const slide = slides[current];
+      if (!slide) return;
+      const isDown = e.deltaY > 0;
+      // If this slide has overflow content, let it scroll internally first
+      if (slide.scrollHeight > slide.clientHeight + 1) {
+        const atBottom = slide.scrollTop + slide.clientHeight >= slide.scrollHeight - 5;
+        const atTop = slide.scrollTop <= 5;
+        if ((isDown && !atBottom) || (!isDown && !atTop)) return;
+      }
+      e.preventDefault();
+      if (isScrolling) return;
+      const next = isDown
         ? Math.min(TOTAL_SLIDES - 1, current + 1)
         : Math.max(0, current - 1);
       if (next === current) return;
