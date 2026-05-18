@@ -17,7 +17,9 @@ const scrollToSlide = (slideIndex: number, onDone?: () => void) => {
   onDone?.();
   const container = document.getElementById("page-scroll-container");
   if (!container) return;
-  container.scrollTo({ left: slideIndex * container.clientWidth, behavior: "smooth" });
+  const slides = Array.from(container.querySelectorAll<HTMLElement>("[data-slide]"));
+  const slide = slides[slideIndex];
+  if (slide) container.scrollTo({ top: slide.offsetTop, behavior: "smooth" });
 };
 
 const SidebarNav = ({
@@ -135,10 +137,14 @@ const Nav = ({ basePath = "" }: { basePath?: string }) => {
     if (!container) return;
 
     const handleScroll = () => {
-      const slideWidth = container.clientWidth;
-      if (!slideWidth) return;
-      const idx = Math.round(container.scrollLeft / slideWidth);
-      const link = navLinks.find((l) => parseInt(l.num) === idx);
+      const slides = Array.from(container.querySelectorAll<HTMLElement>("[data-slide]"));
+      let closest = 0;
+      let minDist = Infinity;
+      slides.forEach((el, i) => {
+        const dist = Math.abs(el.offsetTop - container.scrollTop);
+        if (dist < minDist) { minDist = dist; closest = i; }
+      });
+      const link = navLinks.find((l) => parseInt(l.num) === closest);
       setActive(link ? link.href.slice(1) : "");
     };
 
