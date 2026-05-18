@@ -37,7 +37,10 @@ const Footer = () => (
       </p>
 
       <button
-        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        onClick={() => {
+          const container = document.getElementById("page-scroll-container");
+          container?.scrollTo({ left: 0, behavior: "smooth" });
+        }}
         className="flex items-center gap-1.5 font-mono text-[11px] text-muted-foreground transition-colors hover:text-primary"
         aria-label="Back to top"
       >
