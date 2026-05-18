@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 
 const TOTAL_SLIDES = 8;
 
+const getSlides = () =>
+  Array.from(document.querySelectorAll<HTMLElement>("[data-slide]"));
+
 const SlideDots = () => {
   const [active, setActive] = useState(0);
 
@@ -9,7 +12,14 @@ const SlideDots = () => {
     const container = document.getElementById("page-scroll-container");
     if (!container) return;
     const update = () => {
-      setActive(Math.round(container.scrollTop / container.clientHeight));
+      const slides = getSlides();
+      let closest = 0;
+      let minDist = Infinity;
+      slides.forEach((el, i) => {
+        const dist = Math.abs(el.offsetTop - container.scrollTop);
+        if (dist < minDist) { minDist = dist; closest = i; }
+      });
+      setActive(closest);
     };
     container.addEventListener("scroll", update, { passive: true });
     return () => container.removeEventListener("scroll", update);
@@ -17,7 +27,9 @@ const SlideDots = () => {
 
   const goTo = (i: number) => {
     const container = document.getElementById("page-scroll-container");
-    container?.scrollTo({ top: i * container.clientHeight, behavior: "smooth" });
+    if (!container) return;
+    const slide = getSlides()[i];
+    if (slide) container.scrollTo({ top: slide.offsetTop, behavior: "smooth" });
   };
 
   const dots = Array.from({ length: TOTAL_SLIDES }).map((_, i) => (

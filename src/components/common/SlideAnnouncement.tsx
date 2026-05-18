@@ -14,7 +14,13 @@ const SlideAnnouncement = () => {
     let timeout: ReturnType<typeof setTimeout>;
 
     const handleScroll = () => {
-      const idx = Math.round(container.scrollTop / container.clientHeight);
+      const slides = Array.from(document.querySelectorAll<HTMLElement>("[data-slide]"));
+      let idx = 0;
+      let minDist = Infinity;
+      slides.forEach((el, i) => {
+        const dist = Math.abs(el.offsetTop - container.scrollTop);
+        if (dist < minDist) { minDist = dist; idx = i; }
+      });
       if (idx !== prevIdx.current) {
         prevIdx.current = idx;
         clearTimeout(timeout);

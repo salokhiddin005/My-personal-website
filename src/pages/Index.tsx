@@ -13,6 +13,25 @@ import AmbientGlow from "@/components/common/AmbientGlow";
 import ParticleCanvas from "@/components/common/ParticleCanvas";
 import SectionTint from "@/components/common/SectionTint";
 
+const getSlides = () =>
+  Array.from(document.querySelectorAll<HTMLElement>("[data-slide]"));
+
+const getCurrentIndex = (container: HTMLElement) => {
+  const slides = getSlides();
+  let closest = 0;
+  let minDist = Infinity;
+  slides.forEach((el, i) => {
+    const dist = Math.abs(el.offsetTop - container.scrollTop);
+    if (dist < minDist) { minDist = dist; closest = i; }
+  });
+  return closest;
+};
+
+const scrollToSlide = (container: HTMLElement, index: number) => {
+  const slide = getSlides()[index];
+  if (slide) container.scrollTo({ top: slide.offsetTop, behavior: "smooth" });
+};
+
 const TOTAL_SLIDES = 8;
 
 const useKeyboardNav = (enabled: boolean) => {
@@ -22,11 +41,11 @@ const useKeyboardNav = (enabled: boolean) => {
       if (e.key !== "ArrowUp" && e.key !== "ArrowDown") return;
       const container = document.getElementById("page-scroll-container");
       if (!container) return;
-      const current = Math.round(container.scrollTop / container.clientHeight);
-      if (e.key === "ArrowDown" && current < TOTAL_SLIDES - 1)
-        container.scrollTo({ top: (current + 1) * container.clientHeight, behavior: "smooth" });
-      if (e.key === "ArrowUp" && current > 0)
-        container.scrollTo({ top: (current - 1) * container.clientHeight, behavior: "smooth" });
+      const current = getCurrentIndex(container);
+      const next = e.key === "ArrowDown"
+        ? Math.min(TOTAL_SLIDES - 1, current + 1)
+        : Math.max(0, current - 1);
+      if (next !== current) scrollToSlide(container, next);
     };
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
@@ -42,12 +61,13 @@ const useWheelNav = (enabled: boolean) => {
       if (isScrolling) return;
       const container = document.getElementById("page-scroll-container");
       if (!container) return;
-      const current = Math.round(container.scrollTop / container.clientHeight);
-      const direction = e.deltaY > 0 ? 1 : -1;
-      const next = Math.max(0, Math.min(TOTAL_SLIDES - 1, current + direction));
+      const current = getCurrentIndex(container);
+      const next = e.deltaY > 0
+        ? Math.min(TOTAL_SLIDES - 1, current + 1)
+        : Math.max(0, current - 1);
       if (next === current) return;
       isScrolling = true;
-      container.scrollTo({ top: next * container.clientHeight, behavior: "smooth" });
+      scrollToSlide(container, next);
       setTimeout(() => { isScrolling = false; }, 800);
     };
     window.addEventListener("wheel", handleWheel, { passive: false });
@@ -57,7 +77,8 @@ const useWheelNav = (enabled: boolean) => {
 
 const Slide = ({ children }: { children: React.ReactNode }) => (
   <div
-    className="min-h-full w-full shrink-0 overflow-x-hidden"
+    data-slide
+    className="h-full w-full shrink-0 overflow-y-auto overflow-x-hidden"
     style={{ scrollSnapAlign: "start" }}
   >
     {children}
