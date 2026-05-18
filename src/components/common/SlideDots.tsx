@@ -9,7 +9,7 @@ const SlideDots = () => {
     const container = document.getElementById("page-scroll-container");
     if (!container) return;
     const update = () => {
-      setActive(Math.round(container.scrollLeft / container.clientWidth));
+      setActive(Math.round(container.scrollTop / container.clientHeight));
     };
     container.addEventListener("scroll", update, { passive: true });
     return () => container.removeEventListener("scroll", update);
@@ -17,7 +17,7 @@ const SlideDots = () => {
 
   const goTo = (i: number) => {
     const container = document.getElementById("page-scroll-container");
-    container?.scrollTo({ left: i * container.clientWidth, behavior: "smooth" });
+    container?.scrollTo({ top: i * container.clientHeight, behavior: "smooth" });
   };
 
   const dots = Array.from({ length: TOTAL_SLIDES }).map((_, i) => (

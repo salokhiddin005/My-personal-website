@@ -1,4 +1,4 @@
-import { ArrowUp, Github, Linkedin, Mail } from "lucide-react";
+import { ArrowUp, GithubIcon, LinkedinIcon, Mail } from "lucide-react";
 
 const Footer = () => (
   <footer className="relative z-10 border-t border-border bg-card/50 px-4 py-8 sm:px-6">
@@ -18,7 +18,7 @@ const Footer = () => (
           aria-label="LinkedIn"
           className="text-muted-foreground transition-colors hover:text-primary"
         >
-          <Linkedin className="h-4 w-4" />
+          <LinkedinIcon className="h-4 w-4" />
         </a>
         <a
           href="https://github.com/salokhiddin005"
@@ -27,7 +27,7 @@ const Footer = () => (
           aria-label="GitHub"
           className="text-muted-foreground transition-colors hover:text-primary"
         >
-          <Github className="h-4 w-4" />
+          <GithubIcon className="h-4 w-4" />
         </a>
       </div>
 
@@ -39,7 +39,7 @@ const Footer = () => (
       <button
         onClick={() => {
           const container = document.getElementById("page-scroll-container");
-          container?.scrollTo({ left: 0, behavior: "smooth" });
+          container?.scrollTo({ top: 0, behavior: "smooth" });
         }}
         className="flex items-center gap-1.5 font-mono text-[11px] text-muted-foreground transition-colors hover:text-primary"
         aria-label="Back to top"

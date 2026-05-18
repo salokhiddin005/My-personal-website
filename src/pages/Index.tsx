@@ -19,14 +19,14 @@ const useKeyboardNav = (enabled: boolean) => {
   useEffect(() => {
     if (!enabled) return;
     const handleKey = (e: KeyboardEvent) => {
-      if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
+      if (e.key !== "ArrowUp" && e.key !== "ArrowDown") return;
       const container = document.getElementById("page-scroll-container");
       if (!container) return;
-      const current = Math.round(container.scrollLeft / container.clientWidth);
-      if (e.key === "ArrowRight" && current < TOTAL_SLIDES - 1)
-        container.scrollTo({ left: (current + 1) * container.clientWidth, behavior: "smooth" });
-      if (e.key === "ArrowLeft" && current > 0)
-        container.scrollTo({ left: (current - 1) * container.clientWidth, behavior: "smooth" });
+      const current = Math.round(container.scrollTop / container.clientHeight);
+      if (e.key === "ArrowDown" && current < TOTAL_SLIDES - 1)
+        container.scrollTo({ top: (current + 1) * container.clientHeight, behavior: "smooth" });
+      if (e.key === "ArrowUp" && current > 0)
+        container.scrollTo({ top: (current - 1) * container.clientHeight, behavior: "smooth" });
     };
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
@@ -42,12 +42,12 @@ const useWheelNav = (enabled: boolean) => {
       if (isScrolling) return;
       const container = document.getElementById("page-scroll-container");
       if (!container) return;
-      const current = Math.round(container.scrollLeft / container.clientWidth);
+      const current = Math.round(container.scrollTop / container.clientHeight);
       const direction = e.deltaY > 0 ? 1 : -1;
       const next = Math.max(0, Math.min(TOTAL_SLIDES - 1, current + direction));
       if (next === current) return;
       isScrolling = true;
-      container.scrollTo({ left: next * container.clientWidth, behavior: "smooth" });
+      container.scrollTo({ top: next * container.clientHeight, behavior: "smooth" });
       setTimeout(() => { isScrolling = false; }, 800);
     };
     window.addEventListener("wheel", handleWheel, { passive: false });
@@ -57,7 +57,7 @@ const useWheelNav = (enabled: boolean) => {
 
 const Slide = ({ children }: { children: React.ReactNode }) => (
   <div
-    className="min-w-full h-full shrink-0 overflow-y-auto"
+    className="min-h-full w-full shrink-0 overflow-x-hidden"
     style={{ scrollSnapAlign: "start" }}
   >
     {children}
@@ -86,8 +86,8 @@ const Index = () => {
           <Nav />
           <main
             id="page-scroll-container"
-            className="relative z-10 flex h-full overflow-x-auto overflow-y-hidden pt-14 lg:ml-64 lg:pt-0 no-scrollbar"
-            style={{ scrollSnapType: "x mandatory", scrollBehavior: "smooth" } as React.CSSProperties}
+            className="relative z-10 flex flex-col h-full overflow-y-auto overflow-x-hidden pt-14 lg:ml-64 lg:pt-0 no-scrollbar"
+            style={{ scrollSnapType: "y mandatory", scrollBehavior: "smooth" } as React.CSSProperties}
           >
             <Slide><Hero /></Slide>
             <Slide><About /></Slide>

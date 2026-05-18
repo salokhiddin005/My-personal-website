@@ -8,9 +8,9 @@ const ProgressBar = () => {
     if (!container) return;
 
     const update = () => {
-      const max = container.scrollWidth - container.clientWidth;
+      const max = container.scrollHeight - container.clientHeight;
       if (max <= 0) return;
-      setProgress(container.scrollLeft / max);
+      setProgress(container.scrollTop / max);
     };
 
     container.addEventListener("scroll", update, { passive: true });

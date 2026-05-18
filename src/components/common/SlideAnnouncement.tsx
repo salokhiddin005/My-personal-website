@@ -14,7 +14,7 @@ const SlideAnnouncement = () => {
     let timeout: ReturnType<typeof setTimeout>;
 
     const handleScroll = () => {
-      const idx = Math.round(container.scrollLeft / container.clientWidth);
+      const idx = Math.round(container.scrollTop / container.clientHeight);
       if (idx !== prevIdx.current) {
         prevIdx.current = idx;
         clearTimeout(timeout);
