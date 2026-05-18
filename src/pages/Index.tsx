@@ -33,6 +33,28 @@ const useKeyboardNav = (enabled: boolean) => {
   }, [enabled]);
 };
 
+const useWheelNav = (enabled: boolean) => {
+  useEffect(() => {
+    if (!enabled) return;
+    let isScrolling = false;
+    const handleWheel = (e: WheelEvent) => {
+      e.preventDefault();
+      if (isScrolling) return;
+      const container = document.getElementById("page-scroll-container");
+      if (!container) return;
+      const current = Math.round(container.scrollLeft / container.clientWidth);
+      const direction = e.deltaY > 0 ? 1 : -1;
+      const next = Math.max(0, Math.min(TOTAL_SLIDES - 1, current + direction));
+      if (next === current) return;
+      isScrolling = true;
+      container.scrollTo({ left: next * container.clientWidth, behavior: "smooth" });
+      setTimeout(() => { isScrolling = false; }, 800);
+    };
+    window.addEventListener("wheel", handleWheel, { passive: false });
+    return () => window.removeEventListener("wheel", handleWheel);
+  }, [enabled]);
+};
+
 const Slide = ({ children }: { children: React.ReactNode }) => (
   <div
     className="min-w-full h-full shrink-0 overflow-y-auto"
@@ -45,6 +67,7 @@ const Slide = ({ children }: { children: React.ReactNode }) => (
 const Index = () => {
   const [loading, setLoading] = useState(true);
   useKeyboardNav(!loading);
+  useWheelNav(!loading);
 
   return (
     <>
