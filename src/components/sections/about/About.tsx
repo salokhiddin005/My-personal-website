@@ -26,10 +26,9 @@ const About = () => (
         <div className="space-y-5 md:col-span-3">
           <ScrollReveal>
             <p className="font-body text-base md:text-lg leading-relaxed text-muted-foreground">
-              I am a 4th-year student at Tashkent University of Information Technologies,
-              specializing in artificial intelligence and machine learning. I combine a strong
-              theoretical foundation with hands-on engineering experience across the full AI
-              product lifecycle — from research and prototyping to deployment.
+              I am a 4th-year student at Tashkent University of Information Technologies.
+              I combine a strong theoretical foundation with hands-on engineering experience
+              across the full AI product lifecycle — from research and prototyping to deployment.
             </p>
           </ScrollReveal>
           <ScrollReveal delay={0.1}>
