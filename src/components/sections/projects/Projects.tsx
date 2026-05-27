@@ -28,7 +28,6 @@ const demoImages: Record<string, string> = {
 
 // Values are YouTube video IDs (the part after ?v= in the YouTube URL)
 const demoVideos: Record<string, string> = {
-  "PPE-Detection":        "vCaNWC7eRH8",
   "Fight_detection":      "3d-h8dMxd-g",
   "nail-size-detection":  "JoRsSS1znkw",
   "Smart-Gym-Monitoring": "Bom7KjaYd4c",
@@ -305,7 +304,6 @@ const Projects = () => {
 
   const repos: GitHubRepo[] = [
     { id: 1201128514, name: "Fight_detection", description: "Real-time fight and violence detection using computer vision", html_url: "https://github.com/salokhiddin005/Fight_detection", language: "Python", stargazers_count: 0, forks_count: 0, topics: [], fork: false },
-    { id: 1198071383, name: "PPE-Detection", description: "Personal Protective Equipment detection system for workplace safety", html_url: "https://github.com/salokhiddin005/PPE-Detection", language: "Python", stargazers_count: 0, forks_count: 0, topics: [], fork: false },
     { id: 1218642007, name: "Theater-CV", description: "Computer vision application for theater venue monitoring", html_url: "https://github.com/salokhiddin005/Theater-CV", language: "Python", stargazers_count: 0, forks_count: 0, topics: [], fork: false },
     { id: 1211307048, name: "nail-size-detection", description: "Computer vision model for detecting and measuring nail sizes", html_url: "https://github.com/salokhiddin005/nail-size-detection", language: "TypeScript", stargazers_count: 0, forks_count: 0, topics: [], fork: false },
     { id: 1220842292, name: "IV-drip-drop-counter", description: "Computer vision system for counting IV drip drops in medical settings", html_url: "https://github.com/salokhiddin005/IV-drip-drop-counter", language: "Python", stargazers_count: 0, forks_count: 0, topics: [], fork: false },
