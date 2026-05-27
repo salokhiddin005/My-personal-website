@@ -15,7 +15,7 @@ const Experience = () => (
         <div className="space-y-12">
           {experiences.map((exp, i) => (
             <ScrollReveal
-              key={exp.company}
+              key={exp.company ?? i}
               variant={i % 2 === 0 ? "slideFromLeft" : "slideFromRight"}
               delay={i * 0.1}
             >
@@ -36,13 +36,17 @@ const Experience = () => (
                     i % 2 === 0 ? "md:ml-8" : "md:mr-8"
                   }`}
                 >
-                  <div className="mb-1 flex flex-wrap items-center gap-2">
-                    <h3 className="font-display text-base sm:text-lg font-bold text-foreground">{exp.company}</h3>
-                  </div>
+                  {exp.company && (
+                    <div className="mb-1 flex flex-wrap items-center gap-2">
+                      <h3 className="font-display text-base sm:text-lg font-bold text-foreground">{exp.company}</h3>
+                    </div>
+                  )}
                   <p className="font-body text-sm font-semibold text-primary">{exp.role}</p>
-                  <p className="mt-1 font-mono text-xs text-muted-foreground">
-                    {exp.period} · {exp.location}
-                  </p>
+                  {(exp.period || exp.location) && (
+                    <p className="mt-1 font-mono text-xs text-muted-foreground">
+                      {[exp.period, exp.location].filter(Boolean).join(" · ")}
+                    </p>
+                  )}
                   {exp.email && (
                     <a
                       href={`mailto:${exp.email}`}
