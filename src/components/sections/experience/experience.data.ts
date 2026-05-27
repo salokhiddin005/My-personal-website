@@ -37,8 +37,6 @@ export const experiences: Experience[] = [
   {
     company: "Personal & Academic Projects",
     role: "AI/ML Engineer & Developer",
-    period: "2022 – 2023",
-    location: "Tashkent, Uzbekistan",
     achievements: [
       "Explored machine learning fundamentals and applied them to real-world datasets",
       "Built web applications integrating AI APIs for automation and productivity",
