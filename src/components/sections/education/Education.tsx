@@ -32,9 +32,6 @@ const Education = () => (
               combining object detection with precise dimensional analysis for industrial
               quality control applications.
             </p>
-            <p className="mt-2 font-mono text-xs text-muted-foreground">
-              2024 – Present · Capstone Project
-            </p>
             <div className="mt-3 flex flex-wrap gap-1.5">
               {["Computer Vision", "TypeScript", "YOLOv8", "Vercel"].map((t) => (
                 <Tag key={t} variant="gold">{t}</Tag>
