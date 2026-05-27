@@ -52,45 +52,9 @@ const useKeyboardNav = (enabled: boolean) => {
   }, [enabled]);
 };
 
-const useWheelNav = (enabled: boolean) => {
-  useEffect(() => {
-    if (!enabled) return;
-    let isScrolling = false;
-    const handleWheel = (e: WheelEvent) => {
-      const container = document.getElementById("page-scroll-container");
-      if (!container) return;
-      const slides = getSlides();
-      const current = getCurrentIndex(container);
-      const slide = slides[current];
-      if (!slide) return;
-      const isDown = e.deltaY > 0;
-      // If this slide has overflow content, let it scroll internally first
-      if (slide.scrollHeight > slide.clientHeight + 1) {
-        const atBottom = slide.scrollTop + slide.clientHeight >= slide.scrollHeight - 5;
-        const atTop = slide.scrollTop <= 5;
-        if ((isDown && !atBottom) || (!isDown && !atTop)) return;
-      }
-      e.preventDefault();
-      if (isScrolling) return;
-      const next = isDown
-        ? Math.min(TOTAL_SLIDES - 1, current + 1)
-        : Math.max(0, current - 1);
-      if (next === current) return;
-      isScrolling = true;
-      scrollToSlide(container, next);
-      setTimeout(() => { isScrolling = false; }, 800);
-    };
-    window.addEventListener("wheel", handleWheel, { passive: false });
-    return () => window.removeEventListener("wheel", handleWheel);
-  }, [enabled]);
-};
 
 const Slide = ({ children }: { children: React.ReactNode }) => (
-  <div
-    data-slide
-    className="h-full w-full shrink-0 overflow-y-auto overflow-x-hidden"
-    style={{ scrollSnapAlign: "start" }}
-  >
+  <div data-slide className="w-full">
     {children}
   </div>
 );
@@ -98,7 +62,6 @@ const Slide = ({ children }: { children: React.ReactNode }) => (
 const Index = () => {
   const [loading, setLoading] = useState(true);
   useKeyboardNav(!loading);
-  useWheelNav(!loading);
 
   return (
     <>
@@ -118,7 +81,6 @@ const Index = () => {
           <main
             id="page-scroll-container"
             className="relative z-10 flex flex-col h-full overflow-y-auto overflow-x-hidden pt-14 lg:ml-64 lg:pt-0 no-scrollbar"
-            style={{ scrollSnapType: "y mandatory", scrollBehavior: "smooth" } as React.CSSProperties}
           >
             <Slide><Hero /></Slide>
             <Slide><About /></Slide>
