@@ -6,7 +6,7 @@ import { experiences } from "./experience.data";
 const Experience = () => (
   <section className="px-6 py-16 md:py-24">
     <div className="mx-auto max-w-4xl">
-      <SectionTitle overline="Experience" title="Career Journey" id="experience" />
+      <SectionTitle overline="Experience" title="Experience" id="experience" />
 
       <div className="relative">
         {/* Timeline line */}
