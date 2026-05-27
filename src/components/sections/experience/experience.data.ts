@@ -28,7 +28,7 @@ export const experiences: Experience[] = [
     location: "Uzbekistan (Remote)",
     achievements: [
       "Built and deployed conversational AI chatbots using OpenAI and LangChain frameworks",
-      "Developed RAG-based Q&A systems for intelligent document retrieval and question answering",
+      "Built a free, on-device text-to-speech system supporting 12 voices across 7 languages, running CPU-only on laptops, Android, and deployed as a public web app via Flask and Gradio on Hugging Face Spaces",
       "Created text classification pipelines for automated content categorization",
       "Built content summarization tools leveraging large language model APIs",
       "Delivered AI-powered web applications with FastAPI backends and React frontends",
