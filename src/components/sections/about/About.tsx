@@ -57,7 +57,7 @@ const About = () => (
                 { label: "Location", value: "Uzbekistan" },
                 { label: "Education", value: "TUIT — 4th Year (2025)" },
                 { label: "Focus", value: "AI/ML Engineering" },
-                { label: "Languages", value: "Uzbek (Native), English (Advanced), Russian" },
+                { label: "Languages", value: "Uzbek (Native), English (Advanced)" },
               ].map((item) => (
                 <div key={item.label}>
                   <p className="font-mono text-xs uppercase tracking-wider text-primary">{item.label}</p>
@@ -76,7 +76,7 @@ const About = () => (
             { end: 11, suffix: "+", label: "AI Projects Built" },
             { end: 5,  suffix: "+", label: "CV Systems Deployed" },
             { end: 3,  suffix: "",  label: "Industries Served" },
-            { end: 3,  suffix: "",  label: "Languages Spoken" },
+            { end: 2,  suffix: "",  label: "Languages Spoken" },
           ].map(({ end, suffix, label }) => (
             <div key={label} className="text-center">
               <Counter end={end} suffix={suffix} />
