@@ -62,7 +62,7 @@ const Contact = () => (
         <div className="mt-4 flex flex-col sm:flex-row justify-center gap-3">
           <MagneticButton>
             <a
-              href="/resume.eng..pdf"
+              href="/resume.eng.pdf"
               download
               className="inline-flex w-full sm:w-auto justify-center items-center gap-2 rounded-lg border border-primary/40 px-8 py-4 sm:py-3 font-body text-sm font-semibold text-primary transition-colors hover:border-primary hover:bg-primary/10"
             >
@@ -72,7 +72,7 @@ const Contact = () => (
           </MagneticButton>
           <MagneticButton>
             <a
-              href="/resume.eng..pdf"
+              href="/resume.eng.pdf"
               download
               className="inline-flex w-full sm:w-auto justify-center items-center gap-2 rounded-lg border border-primary/40 px-8 py-4 sm:py-3 font-body text-sm font-semibold text-primary transition-colors hover:border-primary hover:bg-primary/10"
             >
