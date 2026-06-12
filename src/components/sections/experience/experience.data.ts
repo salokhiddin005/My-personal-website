@@ -27,7 +27,7 @@ export const experiences: Experience[] = [
   {
     company: "Freelance AI Projects",
     role: "AI/ML Developer",
-    period: "2023 – Present",
+    period: "2024 – Present",
     location: "Uzbekistan (Remote)",
     achievements: [
       "Built and deployed conversational AI chatbots using OpenAI and LangChain frameworks",
