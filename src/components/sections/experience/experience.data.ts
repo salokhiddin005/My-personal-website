@@ -10,7 +10,11 @@ export interface Experience {
 
 export const experiences: Experience[] = [
   {
+    company: "Burhan Vision",
     role: "AI/ML Engineer & Computer Vision Specialist",
+    period: "2024 – 2025",
+    location: "Tashkent, Uzbekistan",
+    email: "salokhiddin@burhanvision.com",
     achievements: [
       "Designed and deployed real-time computer vision systems for object detection, tracking, and classification across industrial and healthcare environments",
       "Built a PPE compliance detection system using YOLOv8 to automate workplace safety monitoring and reduce manual inspection overhead",
