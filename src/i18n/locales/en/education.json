@@ -1,0 +1,13 @@
+{
+  "overline": "Education",
+  "title": "Academic Background",
+  "university": {
+    "name": "Tashkent University of Information Technologies",
+    "period": "2023 – Present · Tashkent, Uzbekistan"
+  },
+  "capstone": {
+    "label": "Capstone Project",
+    "title": "Nail Size Detection",
+    "description": "Computer vision system that detects and measures nail sizes in real time — combining object detection with precise dimensional analysis for industrial quality control applications."
+  }
+}

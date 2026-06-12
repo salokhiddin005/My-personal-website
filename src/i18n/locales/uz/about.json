@@ -1,0 +1,22 @@
+{
+  "overline": "Men haqimda",
+  "title": "AI va zamonaviy texnologiyalarga ishtiyoqim baland",
+  "paragraphs": {
+    "p1": "Men Toshkent Axborot Texnologiyalari Universitetining 4-kurs talabasiman. Men mustahkam nazariy bilimlarni AI mahsulotining to'liq hayot sikli bo'yicha amaliy muhandislik tajribasi bilan birlashtiraman — tadqiqot va prototiplashdan tortib joriy etishgacha.",
+    "p2": "Men ishlab chiqarish darajasidagi AI tizimlarini boshidan oxirigacha quraman — bunga LLM integratsiyasi, RAG quvurlari, kompyuter ko'rish modellari va full-stack veb-ilovalar kiradi. Mening e'tiborim faqat nazariy murakkablikka emas, balki toza arxitektura, samarali inferens va real hayotda joriy etish imkoniyatiga qaratilgan.",
+    "p3": "Meni g'oyalarni ishonchli va kengaytiriladigan mahsulotlarga aylantirish vazifasi ilhomlantiradi. Yakka holda yoki jamoada ishlashda men aniqlik, moslashuvchanlik va haqiqiy muammolarni hal qiluvchi AI yechimlarini yetkazib berishga sodiqligimni namoyon qilaman."
+  },
+  "quickFacts": {
+    "title": "Qisqacha ma'lumot",
+    "location": { "label": "Manzil", "value": "O'zbekiston" },
+    "education": { "label": "Ta'lim", "value": "TATU — 4-kurs (2025)" },
+    "focus": { "label": "Yo'nalish", "value": "AI/ML muhandisligi" },
+    "languages": { "label": "Tillar", "value": "O'zbek (ona tili), Ingliz (yuqori daraja)" }
+  },
+  "stats": {
+    "aiProjects": "Yaratilgan AI loyihalari",
+    "cvSystems": "Joriy etilgan CV tizimlari",
+    "industries": "Xizmat ko'rsatilgan sohalar",
+    "languagesSpoken": "Biladigan tillar"
+  }
+}

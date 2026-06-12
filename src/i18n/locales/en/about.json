@@ -1,0 +1,22 @@
+{
+  "overline": "About Me",
+  "title": "Passionate About AI & Modern Tech",
+  "paragraphs": {
+    "p1": "I am a 4th-year student at Tashkent University of Information Technologies. I combine a strong theoretical foundation with hands-on engineering experience across the full AI product lifecycle — from research and prototyping to deployment.",
+    "p2": "I build production-grade AI systems end-to-end — spanning LLM integration, RAG pipelines, computer vision models, and full-stack web applications. My focus is on clean architecture, efficient inference, and real-world deployability rather than theoretical complexity alone.",
+    "p3": "I'm driven by the challenge of transforming ideas into reliable, scalable products. Whether working independently or within a team, I bring precision, adaptability, and a commitment to delivering AI solutions that solve genuine problems."
+  },
+  "quickFacts": {
+    "title": "Quick Facts",
+    "location": { "label": "Location", "value": "Uzbekistan" },
+    "education": { "label": "Education", "value": "TUIT — 4th Year (2025)" },
+    "focus": { "label": "Focus", "value": "AI/ML Engineering" },
+    "languages": { "label": "Languages", "value": "Uzbek (Native), English (Advanced)" }
+  },
+  "stats": {
+    "aiProjects": "AI Projects Built",
+    "cvSystems": "CV Systems Deployed",
+    "industries": "Industries Served",
+    "languagesSpoken": "Languages Spoken"
+  }
+}

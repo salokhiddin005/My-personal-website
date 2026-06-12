@@ -1,0 +1,10 @@
+{
+  "overline": "Life in Moments",
+  "title": "Beyond Code",
+  "entries": {
+    "graduation": { "alt": "Graduation ceremony", "caption": "Graduation Day", "category": "Education" },
+    "event-1": { "alt": "Tech event presentation", "caption": "Tech Conference", "category": "Events" },
+    "event-2": { "alt": "Hackathon participation", "caption": "Hackathon", "category": "Events" },
+    "work": { "alt": "Professional life", "caption": "Professional Life", "category": "Work" }
+  }
+}

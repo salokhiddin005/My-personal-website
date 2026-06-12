@@ -1,0 +1,11 @@
+{
+  "overline": "Навыки",
+  "title": "Технологии и инструменты",
+  "categories": {
+    "aiLlms": "AI и LLM",
+    "machineLearning": "Машинное обучение",
+    "deepLearning": "Глубокое обучение",
+    "dataDatabases": "Данные и базы данных",
+    "toolsDevops": "Инструменты и DevOps"
+  }
+}

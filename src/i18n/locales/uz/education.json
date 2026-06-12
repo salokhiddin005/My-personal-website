@@ -1,0 +1,13 @@
+{
+  "overline": "Ta'lim",
+  "title": "Ta'lim",
+  "university": {
+    "name": "Toshkent Axborot Texnologiyalari Universiteti",
+    "period": "2023 – hozirgacha · Toshkent, O'zbekiston"
+  },
+  "capstone": {
+    "label": "Yakuniy loyiha",
+    "title": "Mix o'lchamini aniqlash",
+    "description": "Real vaqtda mix o'lchamlarini aniqlaydigan va o'lchaydigan kompyuter ko'rish tizimi — sanoat sifat nazorati ilovalari uchun obyektlarni aniqlashni aniq o'lchov tahlili bilan birlashtiradi."
+  }
+}

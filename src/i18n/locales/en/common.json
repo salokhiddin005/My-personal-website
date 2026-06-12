@@ -1,0 +1,38 @@
+{
+  "nav": {
+    "navigation": "Navigation",
+    "about": "About",
+    "experience": "Experience",
+    "skills": "Skills",
+    "projects": "Projects",
+    "blog": "Blog",
+    "education": "Education",
+    "contact": "Contact"
+  },
+  "sidebar": {
+    "tagline": "AI / ML Engineer",
+    "myTime": "My Time",
+    "currentlyBuilding": "Currently Building",
+    "building": ["Scam Call Detector", "AI Roof Visualizer", "Smart Package Room"]
+  },
+  "social": {
+    "github": "GitHub",
+    "linkedin": "LinkedIn",
+    "email": "Email"
+  },
+  "menu": {
+    "open": "Open menu",
+    "close": "Close menu"
+  },
+  "footer": {
+    "credit": "Designed & Built by Saloxiddin G'opirjonov",
+    "backToTop": "back_to_top()",
+    "backToTopAria": "Back to top"
+  },
+  "language": {
+    "toggleAria": "Toggle language",
+    "en": "English",
+    "ru": "Русский",
+    "uz": "O'zbek"
+  }
+}

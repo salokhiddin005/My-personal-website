@@ -1,0 +1,30 @@
+{
+  "overline": "Projects",
+  "title": "What I've Built",
+  "filterAll": "All",
+  "viewOnGithub": "View on GitHub",
+  "watchDemo": "Watch Demo",
+  "viewPreview": "View Preview",
+  "noDescription": "No description provided.",
+  "loadError": "Could not load repositories. Please try again later.",
+  "displayNames": {
+    "Bizness-Hisobchi": "Cashflow Telegram Bot"
+  },
+  "descriptions": {
+    "Fight_detection": "Real-time fight and violence detection using computer vision",
+    "Theater-CV": "Computer vision application for theater venue monitoring",
+    "nail-size-detection": "Computer vision model for detecting and measuring nail sizes",
+    "IV-drip-drop-counter": "Computer vision system for counting IV drip drops in medical settings",
+    "Smart-Gym-Monitoring": "AI-powered gym monitoring system using computer vision",
+    "Password-Manager": "Secure password manager application",
+    "Text-To-Speech": "Text-to-speech conversion application",
+    "Bizness-Hisobchi": "Business accounting application for tracking income and expenses",
+    "employment-classification": "ML classification model for employment data analysis",
+    "House-price-prediction": "Machine learning model for predicting house prices"
+  },
+  "links": {
+    "liveDemo": "Live Demo ↗",
+    "liveApp": "Live App ↗",
+    "liveDemoHf": "🤗 Live Demo on Hugging Face ↗"
+  }
+}

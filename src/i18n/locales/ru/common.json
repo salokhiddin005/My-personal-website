@@ -1,0 +1,38 @@
+{
+  "nav": {
+    "navigation": "Навигация",
+    "about": "Обо мне",
+    "experience": "Опыт",
+    "skills": "Навыки",
+    "projects": "Проекты",
+    "blog": "Блог",
+    "education": "Образование",
+    "contact": "Контакты"
+  },
+  "sidebar": {
+    "tagline": "AI/ML инженер",
+    "myTime": "Моё время",
+    "currentlyBuilding": "Сейчас разрабатываю",
+    "building": ["Детектор мошеннических звонков", "AI-визуализатор крыш", "Умная комната для посылок"]
+  },
+  "social": {
+    "github": "GitHub",
+    "linkedin": "LinkedIn",
+    "email": "Почта"
+  },
+  "menu": {
+    "open": "Открыть меню",
+    "close": "Закрыть меню"
+  },
+  "footer": {
+    "credit": "Дизайн и разработка — Saloxiddin G'opirjonov",
+    "backToTop": "back_to_top()",
+    "backToTopAria": "Наверх"
+  },
+  "language": {
+    "toggleAria": "Переключить язык",
+    "en": "English",
+    "ru": "Русский",
+    "uz": "O'zbek"
+  }
+}

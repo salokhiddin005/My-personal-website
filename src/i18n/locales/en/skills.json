@@ -1,0 +1,11 @@
+{
+  "overline": "Skills",
+  "title": "Tech Stack & Tools",
+  "categories": {
+    "aiLlms": "AI & LLMs",
+    "machineLearning": "Machine Learning",
+    "deepLearning": "Deep Learning",
+    "dataDatabases": "Data & Databases",
+    "toolsDevops": "Tools & DevOps"
+  }
+}

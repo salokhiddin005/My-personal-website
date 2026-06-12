@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Maximize2 } from "lucide-react";
 import SectionTitle from "@/components/common/SectionTitle";
 import ScrollReveal from "@/components/common/ScrollReveal";
@@ -20,16 +21,25 @@ const spanClasses: Record<GalleryEntry["span"], string> = {
   normal: "",
 };
 
+interface GalleryEntryText {
+  alt: string;
+  caption: string;
+  category: string;
+}
+
 const Gallery = () => {
+  const { t } = useTranslation("gallery");
   const [selected, setSelected] = useState<GalleryEntry | null>(null);
+  const entriesText = t("entries", { returnObjects: true }) as Record<string, GalleryEntryText>;
+  const entries: GalleryEntry[] = galleryEntries.map((entry) => ({ ...entry, ...entriesText[entry.id] }));
 
   return (
     <section className="px-6 py-16 md:py-24">
       <div className="mx-auto max-w-6xl">
-        <SectionTitle overline="Life in Moments" title="Beyond Code" />
+        <SectionTitle overline={t("overline")} title={t("title")} />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:grid-cols-3 md:gap-4">
-          {galleryEntries.map((entry, i) => {
+          {entries.map((entry, i) => {
             const thumbnail = entry.thumbnail ?? getGalleryThumbnail(entry.folder);
 
             return (

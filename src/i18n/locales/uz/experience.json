@@ -1,0 +1,41 @@
+{
+  "overline": "Tajriba",
+  "title": "Tajriba",
+  "items": [
+    {
+      "company": "Burhan Vision",
+      "role": "AI/ML muhandisi va kompyuter ko'rish bo'yicha mutaxassis",
+      "period": "2024 – 2025",
+      "location": "Toshkent, O'zbekiston",
+      "achievements": [
+        "Sanoat va tibbiyot sohalarida obyektlarni aniqlash, kuzatish va tasniflash uchun real vaqt rejimida ishlaydigan kompyuter ko'rish tizimlarini ishlab chiqdim va joriy etdim",
+        "Ish joyidagi xavfsizlik monitoringini avtomatlashtirish va qo'l bilan tekshirish yukini kamaytirish uchun YOLOv8 asosida shaxsiy himoya vositalariga rioya qilishni aniqlovchi tizim yaratdim",
+        "Jonli xavfsizlik kuzatuvi uchun janjal va zo'ravonlikni aniqlovchi tizim yaratdim, bu real vaqtda avtomatik xavf haqida ogohlantirish imkonini beradi",
+        "Kompyuter ko'rish asosida tibbiy darajadagi tomchilatish hisoblagichini ishlab chiqdim, bu klinik sharoitda bemorni qo'l bilan kuzatishdagi xatolarni kamaytiradi",
+        "Mijoz infratuzilmasiga muammosiz integratsiya qilish imkonini beruvchi FastAPI REST endpointlari bilan ishlab chiqarishga tayyor CV modellarini yetkazib berdim"
+      ]
+    },
+    {
+      "company": "Frilanser AI loyihalari",
+      "role": "AI/ML dasturchi",
+      "period": "2024 – hozirgacha",
+      "location": "O'zbekiston (masofadan)",
+      "achievements": [
+        "OpenAI va LangChain freymvorklari asosida suhbat AI chatbotlarini yaratdim va joriy etdim",
+        "7 tilda 12 ovozni qo'llab-quvvatlaydigan, faqat CPU'da noutbuk va Android'da ishlaydigan bepul matn-nutqqa aylantirish tizimini yaratdim va uni Flask va Gradio yordamida Hugging Face Spaces'da ommaviy veb-ilova sifatida joriy etdim",
+        "Kontentni avtomatik tasniflash uchun matn klassifikatsiya quvurlarini yaratdim",
+        "Katta til modellari API'laridan foydalanib kontentni qisqartirish vositalarini yaratdim",
+        "FastAPI backend va React frontend asosida AI bilan ishlaydigan veb-ilovalarni yetkazib berdim"
+      ]
+    },
+    {
+      "company": "Shaxsiy va o'quv loyihalari",
+      "role": "AI/ML muhandisi va dasturchi",
+      "achievements": [
+        "Mashinali o'qitish asoslarini o'rgandim va ularni real ma'lumotlar to'plamlariga qo'lladim",
+        "Avtomatlashtirish va samaradorlik uchun AI API'larini integratsiya qilgan veb-ilovalarni yaratdim",
+        "Raqamli transformatsiya va AI joriy etish bo'yicha ilmiy tadqiqotlarga hissa qo'shdim"
+      ]
+    }
+  ]
+}

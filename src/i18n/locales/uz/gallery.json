@@ -1,0 +1,10 @@
+{
+  "overline": "Hayotdan lavhalar",
+  "title": "Koddan tashqarida",
+  "entries": {
+    "graduation": { "alt": "Bitiruv marosimi", "caption": "Bitiruv kuni", "category": "Ta'lim" },
+    "event-1": { "alt": "Texnologik tadbirda taqdimot", "caption": "Texnologik konferensiya", "category": "Tadbirlar" },
+    "event-2": { "alt": "Hakaton ishtiroki", "caption": "Hakaton", "category": "Tadbirlar" },
+    "work": { "alt": "Kasbiy hayot", "caption": "Kasbiy hayot", "category": "Ish" }
+  }
+}

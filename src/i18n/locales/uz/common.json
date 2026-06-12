@@ -1,0 +1,38 @@
+{
+  "nav": {
+    "navigation": "Navigatsiya",
+    "about": "Men haqimda",
+    "experience": "Tajriba",
+    "skills": "Ko'nikmalar",
+    "projects": "Loyihalar",
+    "blog": "Blog",
+    "education": "Ta'lim",
+    "contact": "Aloqa"
+  },
+  "sidebar": {
+    "tagline": "AI/ML muhandisi",
+    "myTime": "Mening vaqtim",
+    "currentlyBuilding": "Hozir yaratayotganlarim",
+    "building": ["Firibgar qo'ng'iroqlarni aniqlovchi", "AI tom vizualizatori", "Aqlli pochta xonasi"]
+  },
+  "social": {
+    "github": "GitHub",
+    "linkedin": "LinkedIn",
+    "email": "Pochta"
+  },
+  "menu": {
+    "open": "Menyuni ochish",
+    "close": "Menyuni yopish"
+  },
+  "footer": {
+    "credit": "Dizayn va ishlab chiqish — Saloxiddin G'opirjonov",
+    "backToTop": "back_to_top()",
+    "backToTopAria": "Yuqoriga"
+  },
+  "language": {
+    "toggleAria": "Tilni almashtirish",
+    "en": "English",
+    "ru": "Русский",
+    "uz": "O'zbek"
+  }
+}

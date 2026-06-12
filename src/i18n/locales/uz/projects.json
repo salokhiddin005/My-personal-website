@@ -1,0 +1,30 @@
+{
+  "overline": "Loyihalar",
+  "title": "Men nima yaratdim",
+  "filterAll": "Barchasi",
+  "viewOnGithub": "GitHub'da ko'rish",
+  "watchDemo": "Demo ko'rish",
+  "viewPreview": "Ko'rib chiqish",
+  "noDescription": "Tavsif berilmagan.",
+  "loadError": "Repozitoriylarni yuklab bo'lmadi. Keyinroq qayta urinib ko'ring.",
+  "displayNames": {
+    "Bizness-Hisobchi": "Moliya hisobi Telegram boti"
+  },
+  "descriptions": {
+    "Fight_detection": "Kompyuter ko'rish yordamida real vaqtda janjal va zo'ravonlikni aniqlash",
+    "Theater-CV": "Teatr maydonini kuzatish uchun kompyuter ko'rish ilovasi",
+    "nail-size-detection": "Mixlar o'lchamini aniqlash va o'lchash uchun kompyuter ko'rish modeli",
+    "IV-drip-drop-counter": "Tibbiy muassasalarda tomchilatish tomchilarini hisoblash uchun kompyuter ko'rish tizimi",
+    "Smart-Gym-Monitoring": "Kompyuter ko'rish asosida ishlaydigan aqlli sport zali monitoring tizimi",
+    "Password-Manager": "Xavfsiz parollar menejeri ilovasi",
+    "Text-To-Speech": "Matnni nutqqa aylantirish ilovasi",
+    "Bizness-Hisobchi": "Daromad va xarajatlarni kuzatish uchun biznes hisob ilovasi",
+    "employment-classification": "Bandlik ma'lumotlarini tahlil qilish uchun ML klassifikatsiya modeli",
+    "House-price-prediction": "Uy narxlarini bashorat qilish uchun mashinali o'qitish modeli"
+  },
+  "links": {
+    "liveDemo": "Jonli demo ↗",
+    "liveApp": "Jonli ilova ↗",
+    "liveDemoHf": "🤗 Hugging Face'da jonli demo ↗"
+  }
+}

@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslation, type TFunction } from "react-i18next";
 import { Star, GitFork, ExternalLink, Code, Play, Image, X } from "lucide-react";
 import SectionTitle from "@/components/common/SectionTitle";
 import ScrollReveal from "@/components/common/ScrollReveal";
@@ -7,7 +8,6 @@ import ScrollReveal from "@/components/common/ScrollReveal";
 interface GitHubRepo {
   id: number;
   name: string;
-  description: string | null;
   html_url: string;
   language: string | null;
   stargazers_count: number;
@@ -15,10 +15,6 @@ interface GitHubRepo {
   topics: string[];
   fork: boolean;
 }
-
-const displayNames: Record<string, string> = {
-  "Bizness-Hisobchi": "Cashflow Telegram Bot",
-};
 
 // Direct image URLs for repos without video demos
 const demoImages: Record<string, string> = {
@@ -38,11 +34,11 @@ const demoVideos: Record<string, string> = {
   "Catching_Game_":       "mmdZWo2aztE",
 };
 
-const projectLinks: Record<string, { label: string; url: string }> = {
+const projectLinks: Record<string, { label?: string; labelKey?: string; url: string }> = {
   "Bizness-Hisobchi":    { label: "@business_ledger_bot", url: "https://t.me/business_ledger_bot" },
-  "nail-size-detection": { label: "Live Demo ↗", url: "https://nail-size-detection-y5ms.vercel.app" },
-  "Text-To-Speech":      { label: "🤗 Live Demo on Hugging Face ↗", url: "https://huggingface.co/spaces/saloxiddin005/tts-demo" },
-  "Password-Manager":    { label: "Live App ↗", url: "https://password-manager-puce-rho.vercel.app/" },
+  "nail-size-detection": { labelKey: "links.liveDemo", url: "https://nail-size-detection-y5ms.vercel.app" },
+  "Text-To-Speech":      { labelKey: "links.liveDemoHf", url: "https://huggingface.co/spaces/saloxiddin005/tts-demo" },
+  "Password-Manager":    { labelKey: "links.liveApp", url: "https://password-manager-puce-rho.vercel.app/" },
 };
 
 const languageColors: Record<string, string> = {
@@ -61,7 +57,11 @@ const languageColors: Record<string, string> = {
   Kotlin: "#A97BFF",
 };
 
+const getDisplayName = (t: TFunction<"projects">, name: string) =>
+  t(`displayNames.${name}`, { defaultValue: name.replace(/-|_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()) });
+
 const VideoModal = ({ videoId, title, onClose }: { videoId: string; title: string; onClose: () => void }) => {
+  const { t } = useTranslation("projects");
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
     document.addEventListener("keydown", handleKey);
@@ -79,7 +79,7 @@ const VideoModal = ({ videoId, title, onClose }: { videoId: string; title: strin
       >
         <div className="flex items-center justify-between border-b border-border px-5 py-3">
           <span className="font-mono text-xs uppercase tracking-widest text-primary">
-            {displayNames[title] ?? title.replace(/-|_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())}
+            {getDisplayName(t, title)}
           </span>
           <button onClick={onClose} className="text-muted-foreground hover:text-foreground transition-colors">
             <X className="h-4 w-4" />
@@ -100,6 +100,7 @@ const VideoModal = ({ videoId, title, onClose }: { videoId: string; title: strin
 };
 
 const ImageModal = ({ imageUrl, title, onClose }: { imageUrl: string; title: string; onClose: () => void }) => {
+  const { t } = useTranslation("projects");
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
     document.addEventListener("keydown", handleKey);
@@ -117,7 +118,7 @@ const ImageModal = ({ imageUrl, title, onClose }: { imageUrl: string; title: str
       >
         <div className="flex items-center justify-between border-b border-border px-5 py-3">
           <span className="font-mono text-xs uppercase tracking-widest text-primary">
-            {displayNames[title] ?? title.replace(/-|_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())}
+            {getDisplayName(t, title)}
           </span>
           <button onClick={onClose} className="text-muted-foreground hover:text-foreground transition-colors">
             <X className="h-4 w-4" />
@@ -144,6 +145,7 @@ const RepoCard = ({
   onWatchDemo?: () => void;
   onViewPreview?: () => void;
 }) => {
+  const { t } = useTranslation("projects");
   const [imgError, setImgError] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
 
@@ -185,6 +187,8 @@ const RepoCard = ({
     ? demoImages[repo.name]
     : null;
 
+  const link = projectLinks[repo.name];
+
   return (
     <div ref={cardRef} onMouseMove={handleMouseMove} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="group flex h-full w-full flex-col overflow-hidden border border-border bg-card transition-all duration-500">
       {/* Image Header */}
@@ -210,7 +214,7 @@ const RepoCard = ({
         {/* Hover Overlay */}
         <div className="absolute inset-0 flex items-center justify-center bg-primary/10 opacity-0 backdrop-blur-[2px] transition-opacity duration-500 group-hover:opacity-100">
           <div className="translate-y-4 flex items-center gap-2 border border-primary/20 bg-background/80 px-5 py-3 transition-transform duration-500 group-hover:translate-y-0">
-            <span className="font-mono text-xs uppercase tracking-wider text-primary">View on GitHub</span>
+            <span className="font-mono text-xs uppercase tracking-wider text-primary">{t("viewOnGithub")}</span>
             <ExternalLink className="h-4 w-4 text-primary" />
           </div>
         </div>
@@ -231,21 +235,21 @@ const RepoCard = ({
       {/* Content Body */}
       <div className="flex flex-1 flex-col p-5 sm:p-6 md:p-8">
         <h3 className="font-display text-2xl font-bold leading-tight italic text-foreground line-clamp-2">
-          {displayNames[repo.name] ?? repo.name.replace(/-|_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())}
+          {getDisplayName(t, repo.name)}
         </h3>
 
         <p className="mt-4 font-body text-sm leading-relaxed text-muted-foreground line-clamp-2">
-          {repo.description ?? "No description provided."}
+          {t(`descriptions.${repo.name}`, { defaultValue: t("noDescription") })}
         </p>
 
-        {projectLinks[repo.name] && (
+        {link && (
           <a
-            href={projectLinks[repo.name].url}
+            href={link.url}
             target="_blank"
             rel="noopener noreferrer"
             className="mt-2 mb-4 inline-block font-mono text-xs text-primary hover:underline"
           >
-            {projectLinks[repo.name].label}
+            {link.label ?? t(link.labelKey!)}
           </a>
         )}
 
@@ -256,7 +260,7 @@ const RepoCard = ({
               className="flex items-center justify-center gap-2 border border-primary/40 bg-primary/10 px-4 py-2 font-mono text-[10px] uppercase tracking-widest text-primary transition-all duration-300 hover:bg-primary hover:text-primary-foreground"
             >
               {hasVideo ? <Play className="h-3 w-3" /> : <Image className="h-3 w-3" />}
-              {hasVideo ? "Watch Demo" : "View Preview"}
+              {hasVideo ? t("watchDemo") : t("viewPreview")}
             </button>
           )}
 
@@ -289,7 +293,21 @@ const RepoCard = ({
   );
 };
 
+const repos: GitHubRepo[] = [
+  { id: 1201128514, name: "Fight_detection", html_url: "https://github.com/salokhiddin005/Fight_detection", language: "Python", stargazers_count: 0, forks_count: 0, topics: [], fork: false },
+  { id: 1218642007, name: "Theater-CV", html_url: "https://github.com/salokhiddin005/Theater-CV", language: "Python", stargazers_count: 0, forks_count: 0, topics: [], fork: false },
+  { id: 1211307048, name: "nail-size-detection", html_url: "https://github.com/salokhiddin005/nail-size-detection", language: "TypeScript", stargazers_count: 0, forks_count: 0, topics: [], fork: false },
+  { id: 1220842292, name: "IV-drip-drop-counter", html_url: "https://github.com/salokhiddin005/IV-drip-drop-counter", language: "Python", stargazers_count: 0, forks_count: 0, topics: [], fork: false },
+  { id: 1223624774, name: "Smart-Gym-Monitoring", html_url: "https://github.com/salokhiddin005/Smart-Gym-Monitoring", language: "Python", stargazers_count: 0, forks_count: 0, topics: [], fork: false },
+  { id: 1221642157, name: "Password-Manager", html_url: "https://github.com/salokhiddin005/Password-Manager", language: "Python", stargazers_count: 0, forks_count: 0, topics: [], fork: false },
+  { id: 1226340429, name: "Text-To-Speech", html_url: "https://github.com/salokhiddin005/Text-To-Speech", language: "Python", stargazers_count: 0, forks_count: 0, topics: [], fork: false },
+  { id: 1221582841, name: "Bizness-Hisobchi", html_url: "https://github.com/salokhiddin005/Bizness-Hisobchi", language: "Python", stargazers_count: 0, forks_count: 0, topics: [], fork: false },
+  { id: 1165411911, name: "employment-classification", html_url: "https://github.com/salokhiddin005/employment-classification", language: "Jupyter Notebook", stargazers_count: 0, forks_count: 0, topics: [], fork: false },
+  { id: 1165413179, name: "House-price-prediction", html_url: "https://github.com/salokhiddin005/House-price-prediction", language: "Jupyter Notebook", stargazers_count: 0, forks_count: 0, topics: [], fork: false },
+];
+
 const Projects = () => {
+  const { t } = useTranslation("projects");
   const [filter, setFilter] = useState("All");
   const [activeVideo, setActiveVideo] = useState<{ videoId: string; title: string } | null>(null);
   const [activeImage, setActiveImage] = useState<{ imageUrl: string; title: string } | null>(null);
@@ -302,18 +320,6 @@ const Projects = () => {
     setSpotlight({ x: e.clientX - rect.left, y: e.clientY - rect.top, active: true });
   };
 
-  const repos: GitHubRepo[] = [
-    { id: 1201128514, name: "Fight_detection", description: "Real-time fight and violence detection using computer vision", html_url: "https://github.com/salokhiddin005/Fight_detection", language: "Python", stargazers_count: 0, forks_count: 0, topics: [], fork: false },
-    { id: 1218642007, name: "Theater-CV", description: "Computer vision application for theater venue monitoring", html_url: "https://github.com/salokhiddin005/Theater-CV", language: "Python", stargazers_count: 0, forks_count: 0, topics: [], fork: false },
-    { id: 1211307048, name: "nail-size-detection", description: "Computer vision model for detecting and measuring nail sizes", html_url: "https://github.com/salokhiddin005/nail-size-detection", language: "TypeScript", stargazers_count: 0, forks_count: 0, topics: [], fork: false },
-    { id: 1220842292, name: "IV-drip-drop-counter", description: "Computer vision system for counting IV drip drops in medical settings", html_url: "https://github.com/salokhiddin005/IV-drip-drop-counter", language: "Python", stargazers_count: 0, forks_count: 0, topics: [], fork: false },
-    { id: 1223624774, name: "Smart-Gym-Monitoring", description: "AI-powered gym monitoring system using computer vision", html_url: "https://github.com/salokhiddin005/Smart-Gym-Monitoring", language: "Python", stargazers_count: 0, forks_count: 0, topics: [], fork: false },
-    { id: 1221642157, name: "Password-Manager", description: "Secure password manager application", html_url: "https://github.com/salokhiddin005/Password-Manager", language: "Python", stargazers_count: 0, forks_count: 0, topics: [], fork: false },
-    { id: 1226340429, name: "Text-To-Speech", description: "Text-to-speech conversion application", html_url: "https://github.com/salokhiddin005/Text-To-Speech", language: "Python", stargazers_count: 0, forks_count: 0, topics: [], fork: false },
-    { id: 1221582841, name: "Bizness-Hisobchi", description: "Business accounting application for tracking income and expenses", html_url: "https://github.com/salokhiddin005/Bizness-Hisobchi", language: "Python", stargazers_count: 0, forks_count: 0, topics: [], fork: false },
-    { id: 1165411911, name: "employment-classification", description: "ML classification model for employment data analysis", html_url: "https://github.com/salokhiddin005/employment-classification", language: "Jupyter Notebook", stargazers_count: 0, forks_count: 0, topics: [], fork: false },
-    { id: 1165413179, name: "House-price-prediction", description: "Machine learning model for predicting house prices", html_url: "https://github.com/salokhiddin005/House-price-prediction", language: "Jupyter Notebook", stargazers_count: 0, forks_count: 0, topics: [], fork: false },
-  ];
   const isLoading = false;
   const isError = false;
 
@@ -333,7 +339,7 @@ const Projects = () => {
   return (
     <section id="projects" className="scroll-mt-20 px-6 py-16 md:py-24">
       <div className="mx-auto max-w-6xl">
-        <SectionTitle overline="Projects" title="What I've Built" />
+        <SectionTitle overline={t("overline")} title={t("title")} />
 
         {/* Filter tabs */}
         {!isLoading && !isError && (
@@ -349,7 +355,7 @@ const Projects = () => {
                       : "border-border text-muted-foreground hover:border-primary/50 hover:text-foreground"
                   }`}
                 >
-                  {lang}
+                  {lang === "All" ? t("filterAll") : lang}
                 </button>
               ))}
             </div>
@@ -368,7 +374,7 @@ const Projects = () => {
         {/* Error */}
         {isError && (
           <p className="text-center font-mono text-sm text-muted-foreground">
-            Could not load repositories. Please try again later.
+            {t("loadError")}
           </p>
         )}
 

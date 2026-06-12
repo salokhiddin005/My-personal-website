@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { ChevronDown, ChevronRight } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const Hero = () => {
+  const { t } = useTranslation("hero");
   const parallaxRef = useRef<HTMLDivElement>(null);
   const [showSwipeHint, setShowSwipeHint] = useState(true);
 
@@ -93,7 +95,7 @@ const Hero = () => {
                       </h1>
                       <p className="mt-2 font-mono text-sm text-muted-foreground">
                         <span className="text-primary/50">// </span>
-                        AI / ML Engineer · Uzbekistan
+                        {t("subtitle")}
                       </p>
                     </div>
                   </motion.div>
@@ -105,9 +107,7 @@ const Hero = () => {
                     transition={{ delay: 0.55 }}
                   >
                     <p className="pl-1 font-mono text-xs leading-relaxed text-muted-foreground sm:text-sm">
-                      Building intelligent systems with LLMs, RAG pipelines,
-                      <br className="hidden sm:block" />
-                      {" "}and AI-powered web applications.
+                      {t("description")}
                     </p>
                   </motion.div>
 
@@ -163,7 +163,7 @@ const Hero = () => {
       <div
         className={`absolute bottom-16 right-6 z-10 flex items-center gap-1.5 lg:hidden transition-opacity duration-700 ${showSwipeHint ? "opacity-100" : "opacity-0 pointer-events-none"}`}
       >
-        <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">swipe</span>
+        <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">{t("swipe")}</span>
         <ChevronRight className="h-3.5 w-3.5 text-primary animate-pulse" />
       </div>
     </section>

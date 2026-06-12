@@ -1,0 +1,11 @@
+{
+  "overline": "Ko'nikmalar",
+  "title": "Texnologiyalar va vositalar",
+  "categories": {
+    "aiLlms": "AI va LLM",
+    "machineLearning": "Mashinali o'qitish",
+    "deepLearning": "Chuqur o'qitish",
+    "dataDatabases": "Ma'lumotlar va bazalar",
+    "toolsDevops": "Vositalar va DevOps"
+  }
+}

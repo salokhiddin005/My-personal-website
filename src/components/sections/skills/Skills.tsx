@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import ScrollReveal from "@/components/common/ScrollReveal";
 import SectionTitle from "@/components/common/SectionTitle";
 import { motion } from "framer-motion";
@@ -8,7 +9,7 @@ import { Carousel, CarouselContent, CarouselItem, CarouselDots } from "@/compone
 
 const skillCategories = [
   {
-    title: "AI & LLMs",
+    titleKey: "categories.aiLlms",
     skills: [
       { name: "OpenAI API", level: 92 },
       { name: "RAG Systems", level: 88 },
@@ -18,7 +19,7 @@ const skillCategories = [
     ],
   },
   {
-    title: "Machine Learning",
+    titleKey: "categories.machineLearning",
     skills: [
       { name: "scikit-learn", level: 90 },
       { name: "PyTorch", level: 80 },
@@ -28,7 +29,7 @@ const skillCategories = [
     ],
   },
   {
-    title: "Deep Learning",
+    titleKey: "categories.deepLearning",
     skills: [
       { name: "YOLOv8", level: 92 },
       { name: "CNN Architectures", level: 84 },
@@ -38,7 +39,7 @@ const skillCategories = [
     ],
   },
   {
-    title: "Data & Databases",
+    titleKey: "categories.dataDatabases",
     skills: [
       { name: "Python / Pandas", level: 94 },
       { name: "PostgreSQL", level: 85 },
@@ -48,7 +49,7 @@ const skillCategories = [
     ],
   },
   {
-    title: "Tools & DevOps",
+    titleKey: "categories.toolsDevops",
     skills: [
       { name: "Git / GitHub", level: 90 },
       { name: "Docker", level: 78 },
@@ -94,34 +95,38 @@ const SkillBar = ({ name, level, delay }: { name: string; level: number; delay: 
   );
 };
 
-const SkillCard = ({ cat }: { cat: (typeof skillCategories)[number] }) => (
-  <div className="group h-full border border-border bg-card p-5 transition-all duration-300 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5">
-    <h3 className="mb-4 font-mono text-[10px] uppercase tracking-[0.35em] text-primary">
-      <span className="mr-1.5 opacity-50">&gt;</span>
-      {cat.title}
-    </h3>
-    <div className="space-y-3">
-      {cat.skills.map((skill, i) => (
-        <SkillBar key={skill.name} name={skill.name} level={skill.level} delay={i * 80} />
-      ))}
+const SkillCard = ({ cat }: { cat: (typeof skillCategories)[number] }) => {
+  const { t } = useTranslation("skills");
+  return (
+    <div className="group h-full border border-border bg-card p-5 transition-all duration-300 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5">
+      <h3 className="mb-4 font-mono text-[10px] uppercase tracking-[0.35em] text-primary">
+        <span className="mr-1.5 opacity-50">&gt;</span>
+        {t(cat.titleKey)}
+      </h3>
+      <div className="space-y-3">
+        {cat.skills.map((skill, i) => (
+          <SkillBar key={skill.name} name={skill.name} level={skill.level} delay={i * 80} />
+        ))}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 const Skills = () => {
+  const { t } = useTranslation("skills");
   const isNarrow = useMediaQuery(640);
 
   return (
     <section className="px-6 py-16 md:py-24">
       <div className="mx-auto max-w-6xl">
-        <SectionTitle overline="Skills" title="Tech Stack & Tools" id="skills" />
+        <SectionTitle overline={t("overline")} title={t("title")} id="skills" />
 
         {isNarrow ? (
           <ScrollReveal>
             <Carousel opts={{ align: "start" }}>
               <CarouselContent className="-ml-3">
                 {skillCategories.map((cat) => (
-                  <CarouselItem key={cat.title} className="basis-[85%] pl-3">
+                  <CarouselItem key={cat.titleKey} className="basis-[85%] pl-3">
                     <SkillCard cat={cat} />
                   </CarouselItem>
                 ))}
@@ -138,7 +143,7 @@ const Skills = () => {
             className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
           >
             {skillCategories.map((cat) => (
-              <motion.div key={cat.title} variants={variants.fadeUp}>
+              <motion.div key={cat.titleKey} variants={variants.fadeUp}>
                 <SkillCard cat={cat} />
               </motion.div>
             ))}

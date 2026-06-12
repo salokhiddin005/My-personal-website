@@ -1,0 +1,26 @@
+{
+  "overline": "Blog",
+  "title": "Maqolalar va fikrlar",
+  "comingSoon": "Tez kunda",
+  "readTimeSuffix": "daqiqalik o'qish",
+  "posts": {
+    "scam-call-detector": {
+      "title": "n8n, Twilio va OpenAI yordamida firibgar qo'ng'iroqlarni aniqlovchi tizim yaratish",
+      "category": "AI avtomatlashtirish",
+      "readTime": 9,
+      "excerpt": "Qo'ng'iroq qilish va qabul qilish, suhbatlarni real vaqtda matnga aylantirish, firibgarlik xavfini baholash va ogohlantirishlar yuborish uchun n8n, Twilio va OpenAI'ni qanday bog'layotganim haqida — qo'lda tekshirishsiz to'liq avtomatlashtirilgan telefon qo'ng'irog'i AI agenti."
+    },
+    "ai-roof-visualizer": {
+      "title": "AI tom vizualizatsiyasi: bitta fotosuratdan tom maydonlarini aniqlash va realistik materiallarni qo'llash",
+      "category": "Kompyuter ko'rish",
+      "readTime": 10,
+      "excerpt": "Veb-asosidagi tom vizualizatorini yaratish haqida chuqur tahlil — yuklangan uy fotosuratlaridan tom hududlarini segmentatsiya qilish, so'ngra haqiqiy yorug'lik, soyalar va perspektivani saqlab qolgan holda tom ranglari va materiallarini qo'llash."
+    },
+    "smart-package-room": {
+      "title": "Aqlli pochta xonasi monitoringi: video tahlil yordamida pochta ko'targan odamlarni aniqlash",
+      "category": "Edge AI",
+      "readTime": 11,
+      "excerpt": "Turar-joy pochta xonalari uchun video tahlil tizimini loyihalash — quti, sumka va konvert ko'targan odamlarni aniqlash, kirish hodisalarini kuzatish va real vaqtda backend'ga tarkibiy ogohlantirishlarni yuborish."
+    }
+  }
+}
